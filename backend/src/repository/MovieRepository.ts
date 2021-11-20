@@ -1,4 +1,4 @@
-import { Movie } from "src/entity/Movie";
+import Movie from "src/entity/Movie";
 import { EntityRepository, Repository } from "typeorm";
 
 @EntityRepository(Movie)
