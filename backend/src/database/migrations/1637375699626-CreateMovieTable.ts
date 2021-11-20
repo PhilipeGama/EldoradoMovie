@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateMovie1637276879371 implements MigrationInterface {
+export class CreateMovieTable1637375699626 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
@@ -16,17 +16,27 @@ export class CreateMovie1637276879371 implements MigrationInterface {
                 {
                     name: "name",
                     type: "varchar(50)",
-                    isNullable: false,
+                    isNullable: false
 
                 },
                 {
-                    name: "description",
-                    type: "varchar(100)",
+                    name: "synopsis",
+                    type: "text(100)",
                     isNullable: false
                 },
                 {
-                    name: "releaseDate",
-                    type: "varchar(15)",
+                    name: "release_date",
+                    type: "Date",
+                    isNullable: false
+                },
+                {
+                    name: "box_office",
+                    type: "Decimal(10,2)"
+                },
+                {
+                    name: "poster",
+                    type: "varchar(100)",
+                    isNullable: false
                 },
                 {
                     name: "created_at",
@@ -36,6 +46,11 @@ export class CreateMovie1637276879371 implements MigrationInterface {
                 {
                     name: "updated_at",
                     type: "timestamp",
+                    isNullable: true
+                },
+                {
+                    name: 'gender_id',
+                    type: 'int',
                     isNullable: true
                 }
             ]

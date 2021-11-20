@@ -1,7 +1,9 @@
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Gender from "./Gender";
+
 
 @Entity()
-export class Movie {
+export default class Movie {
 
     @PrimaryGeneratedColumn('increment')
     public id: number;
@@ -10,16 +12,29 @@ export class Movie {
     public name: string;
 
     @Column()
-    public description: string;
+    public synopsis: string;
 
     @Column()
-    public releaseDate: string;
+    public release_date: Date;
+
+    @Column()
+    public box_office: number;
+
+    @Column()
+    public poster: string;
 
     @CreateDateColumn()
     public created_at?: Date;
     
     @UpdateDateColumn()
     public updated_at?: Date;
+
+    @ManyToOne(() => Gender)
+    @JoinColumn({
+        name: 'gender_id',
+        referencedColumnName: 'id'
+    })
+    public gender_id;
 
     @BeforeInsert()
     public createAt() {

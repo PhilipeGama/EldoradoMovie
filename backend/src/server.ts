@@ -12,4 +12,4 @@ app.use(router);
 
 app.listen(4001);
 
-console.log("OKAY");
+console.log("PORT 4001")
