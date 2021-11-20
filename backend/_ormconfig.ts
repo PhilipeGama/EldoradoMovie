@@ -11,14 +11,15 @@ module.exports = {
     "database": process.env.DB_NAME,
     "logging": false,
     "entities": [
-      __dirname + "/**/app/entity/*.ts"
-      // __dirname + "/**/app/entity/*.ts"
+      __dirname + "./src/app/entity/*.ts",
+      // __dirname + "/dist/app/entity/*.ts"
     ],
     "migrations": [
-       __dirname + "/**/app/database/migrations/*.ts"
+       __dirname + "./src/app/database/migrations/*.ts",
+      //  __dirname + "/dist/app/database/migrations/*.ts"
     ],
     "cli": {
-        "migrationsDir": "/**/app/database/migrations",
-        "entitiesDir": "/**/app/entity"
+        "migrationsDir": __dirname + "./src/app/database/migrations",
+        "entitiesDir": __dirname + "./src/app/entity"
     }
  }
