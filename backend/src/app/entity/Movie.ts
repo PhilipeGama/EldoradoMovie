@@ -34,7 +34,7 @@ export default class Movie {
         name: 'gender_id',
         referencedColumnName: 'id'
     })
-    public gender_id;
+    public gender: Gender;
 
     @BeforeInsert()
     public createAt() {

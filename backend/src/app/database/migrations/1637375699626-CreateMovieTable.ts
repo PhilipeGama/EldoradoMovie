@@ -51,7 +51,7 @@ export class CreateMovieTable1637375699626 implements MigrationInterface {
                 {
                     name: 'gender_id',
                     type: 'int',
-                    isNullable: true
+                    length: '11'
                 }
             ]
         }))

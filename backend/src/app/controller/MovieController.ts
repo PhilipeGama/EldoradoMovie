@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { Movie } from "src/entity/Movie";
-import MovieRepository from "src/repository/MovieRepository";
+import Movie from "../entity/Movie";
+
+import MovieRepository from "../repository/MovieRepository";
 import { getCustomRepository } from "typeorm";
 
 class MovieController {
@@ -8,7 +9,7 @@ class MovieController {
     async getMovieByID(request: Request, response: Response){
         const movieRepository = getCustomRepository(MovieRepository);
         const { id } = request.params;
-        const movie = await movieRepository.findOne(id);
+        const movie = await movieRepository.findById(id);
 
         return response.json(movie);
         
@@ -17,8 +18,7 @@ class MovieController {
     async getAllMovies(request: Request, response: Response){
         const movieRepository = getCustomRepository(MovieRepository);
 
-        const movie = await movieRepository.find();
-    
+        const movie = await movieRepository.findAll();
 
         return response.json(movie);
         
@@ -48,6 +48,7 @@ class MovieController {
             movie.release_date = request.body.release_date;
             movie.box_office = request.body.box_office;
             movie.poster = request.body.poster;
+            movie.gender = request.body.gender;
 
             movie = await movieRepository.save(movie);
     

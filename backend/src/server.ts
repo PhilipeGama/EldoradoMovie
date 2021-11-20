@@ -1,7 +1,6 @@
 import express from 'express';
 import { createConnection } from 'typeorm';
 import router from './config/router';
-import MovieController from './controller/MovieController';
 
 
 

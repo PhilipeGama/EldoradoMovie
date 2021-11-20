@@ -1,4 +1,5 @@
-import 'dotenv/config';
+require('dotenv').config();
+const { resolve } = require('path')
 
 module.exports = {
 
@@ -10,13 +11,14 @@ module.exports = {
     "database": process.env.DB_NAME,
     "logging": false,
     "entities": [
-       "src/entity/*.ts"
+      __dirname + "/**/app/entity/*.ts"
+      // __dirname + "/**/app/entity/*.ts"
     ],
     "migrations": [
-       "src/database/migrations/*.ts"
+       __dirname + "/**/app/database/migrations/*.ts"
     ],
     "cli": {
-        "migrationsDir": "src/database/migrations",
-        "entitiesDir": "src/entity"
+        "migrationsDir": "/**/app/database/migrations",
+        "entitiesDir": "/**/app/entity"
     }
  }
