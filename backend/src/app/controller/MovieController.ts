@@ -28,7 +28,18 @@ class MovieController {
         try {
             const movieRepository = getCustomRepository(MovieRepository);
 
+
+
             const movieAlreadyExists = await movieRepository.findByName(request.body.name);
+
+
+            const {
+                name
+            } = request.body
+
+            console.log(name);
+
+    
 
             if(typeof movieAlreadyExists !== 'undefined'){
                 response.status(409).json({
@@ -43,6 +54,7 @@ class MovieController {
             let movie = new Movie();
     
     
+        
             movie.name = request.body.name;
             movie.synopsis = request.body.synopsis;
             movie.release_date = request.body.release_date;

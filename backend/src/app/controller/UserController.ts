@@ -1,34 +1,20 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import UserRepository from "../repository/UserRepository";
-import bcrypt from 'bcryptjs';
+import User from "../entity/User";
 
 class UserController {
-    async auth(request: Request, response: Response){
+
+    async postUser(request: Request, response: Response){
         const userRespository = getCustomRepository(UserRepository);
+    
+        let user = new User();
 
-        const user = await userRespository.findByEmail(request.body.email);
+        user.name = request.body.name;
+        user.email = request.body.email;
+        user.password = request.body.password;
 
-        if(typeof user === 'undefined'){
-            return response.json({
-                fail : "fail",
-                data: {
-                    title: "Email não encontrado"
-                }
-            })
-        }
-
-        const passwordIsValid = await bcrypt.compare(request.body.password,user.password);
-        
-        if(!passwordIsValid){
-            return response.json({
-                fail : "fail",
-                data: {
-                    title: "Senha inválida"
-                }
-            })
-        }
-
+        await userRespository.save(user);
 
         return response.json(user);
     }

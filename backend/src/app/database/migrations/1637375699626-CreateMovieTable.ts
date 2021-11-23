@@ -35,7 +35,7 @@ export class CreateMovieTable1637375699626 implements MigrationInterface {
                 },
                 {
                     name: "poster",
-                    type: "varchar(100)",
+                    type: "varchar(250)",
                     isNullable: false
                 },
                 {
