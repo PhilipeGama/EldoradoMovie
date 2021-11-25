@@ -1,14 +1,14 @@
 import express from 'express';
 import { createConnection } from 'typeorm';
-import router from './config/router';
-var bodyParser = require('body-parser');
+import { resolve } from 'path';
 
+import router from './config/router';
 
 const app = express();
+
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-// app.use(bodyParser.urlencoded());
-// app.use(bodyParser.json());
 
 
 // app.use('/static/news', 

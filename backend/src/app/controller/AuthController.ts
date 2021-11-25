@@ -10,6 +10,7 @@ class AuthController {
 
         const user = await userRespository.findByEmail(request.body.email);
 
+    
         if(typeof user === 'undefined'){
             return response.json({
                 fail : "fail",
@@ -30,7 +31,6 @@ class AuthController {
             })
         }
 
-        console.log(user);
 
         delete user.password;
         delete user.created_at;

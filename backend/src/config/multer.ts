@@ -13,7 +13,7 @@ export default {
             let fileName = file.originalname.split('.')[0];
             fileName = slugify(fileName, slugifyConfig);
             const fullFileName = `${hash}-${fileName}.${ext}`;
-            req.body.cover = fullFileName;
+            req.body.poster = fullFileName;
             callback(null, fullFileName);
         }
     })

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Multer from 'multer';
+import Multer  from 'multer';
 
 import AuthController from "src/app/controller/AuthController";
 import uploadConfig from './multer';
@@ -7,7 +7,7 @@ import MovieController from "src/app/controller/MovieController";
 import UserController from "src/app/controller/UserController";
 import Auth from '../app/middlewares/AuthMiddleware';
 
-const upload = Multer();
+const upload = Multer(uploadConfig);
 const router = Router();
 
 
@@ -19,10 +19,9 @@ router.post('/user', UserController.postUser);
 router.use(Auth);
 router.get('/movie', MovieController.getAllMovies);
 router.get('/movie/:id', MovieController.getMovieByID);
-router.post('/movie',MovieController.postMovie);
+router.post('/movie', upload.single('poster'), MovieController.postMovie);
 router.put('/movie', MovieController.putMovie);
 router.delete('/movie/:id',MovieController.deleteMovie);
-
 
 
 

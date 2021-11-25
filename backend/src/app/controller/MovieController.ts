@@ -28,16 +28,11 @@ class MovieController {
         try {
             const movieRepository = getCustomRepository(MovieRepository);
 
-
+            console.log(request.body, request.file);
 
             const movieAlreadyExists = await movieRepository.findByName(request.body.name);
 
 
-            const {
-                name
-            } = request.body
-
-            console.log(name);
 
     
 
