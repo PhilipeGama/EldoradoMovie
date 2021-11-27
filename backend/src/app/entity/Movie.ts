@@ -1,5 +1,11 @@
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import slugify from "slugify";
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Gender from "./Gender";
+
+// import pathConfig from "src/config/path";
+
+import slugifyConfig from "../../config/slugify";
+
 
 
 @Entity()
@@ -10,6 +16,9 @@ export default class Movie {
 
     @Column()
     public name: string;
+
+    @Column('varchar')
+    public slug: string;
 
     @Column()
     public synopsis: string;
@@ -36,6 +45,8 @@ export default class Movie {
     })
     public gender: Gender;
 
+    public full_path: string;
+    
     @BeforeInsert()
     public createAt() {
         this.created_at = new Date();
@@ -45,5 +56,16 @@ export default class Movie {
     public updatedAt() {
         this.updated_at = new Date();
     }
+
+    @BeforeUpdate()
+    @BeforeInsert()
+    public addSlug() {
+        this.slug = slugify(this.name, slugifyConfig)
+    }
+
+    // @AfterLoad()
+    // public setFullPath() {
+    //     this.full_path = `${pathConfig.fullStaticPath}/${this.poster}`;
+    // }
 
 }

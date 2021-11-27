@@ -48,7 +48,7 @@ class MovieController {
             
             let movie = new Movie();
     
-    
+            console.log("aaaaaaaaaaaaaaaaaaa1212")
         
             movie.name = request.body.name;
             movie.synopsis = request.body.synopsis;

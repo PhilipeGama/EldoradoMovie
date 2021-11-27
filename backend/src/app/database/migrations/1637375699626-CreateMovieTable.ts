@@ -20,6 +20,12 @@ export class CreateMovieTable1637375699626 implements MigrationInterface {
 
                 },
                 {
+                    name: "slug",
+                    type: "varchar",
+                    isNullable: false
+
+                },
+                {
                     name: "synopsis",
                     type: "text(100)",
                     isNullable: false
