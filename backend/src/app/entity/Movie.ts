@@ -2,7 +2,7 @@ import slugify from "slugify";
 import { AfterLoad, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Gender from "./Gender";
 
-// import pathConfig from "src/config/path";
+import pathConfig from "src/config/path";
 
 import slugifyConfig from "../../config/slugify";
 
@@ -34,7 +34,7 @@ export default class Movie {
 
     @CreateDateColumn()
     public created_at?: Date;
-    
+
     @UpdateDateColumn()
     public updated_at?: Date;
 
@@ -45,8 +45,8 @@ export default class Movie {
     })
     public gender: Gender;
 
-    public full_path: string;
-    
+    // public full_path: string;
+
     @BeforeInsert()
     public createAt() {
         this.created_at = new Date();

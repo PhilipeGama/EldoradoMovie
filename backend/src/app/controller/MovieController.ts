@@ -99,6 +99,7 @@ class MovieController {
         const movieRepository = getCustomRepository(MovieRepository);
 
         const { id } = request.params;
+        console.log(id)
 
         let movie = await movieRepository.findById(id);
 
