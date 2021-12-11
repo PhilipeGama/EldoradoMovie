@@ -12,9 +12,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-// app.use('/static/news', 
-//     express.static(resolve(__dirname, '..', 'public', 'static', 'uploads'))
-// );
+app.use('/static/movies', 
+    express.static(resolve(__dirname, '..', 'public', 'static', 'uploads'))
+);
 
 
 createConnection().then(() => "Database was connected successful!");
