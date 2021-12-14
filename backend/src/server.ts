@@ -3,6 +3,8 @@ import { createConnection } from 'typeorm';
 import { resolve } from 'path';
 import cors from 'cors';
 
+
+
 import router from './config/router';
 
 const app = express();
@@ -15,6 +17,7 @@ app.use(express.json());
 app.use('/static/movies', 
     express.static(resolve(__dirname, '..', 'public', 'static', 'uploads'))
 );
+
 
 
 createConnection().then(() => "Database was connected successful!");

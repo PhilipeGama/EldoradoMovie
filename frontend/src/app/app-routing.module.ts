@@ -5,8 +5,14 @@ import { MovieRegisterComponent} from './components/pages/movie/movie-register/m
 import { CardsComponent } from './components/pages/movie/cards/cards.component';
 import { MovieDeleteComponent } from './components/pages/movie/movie-delete/movie-delete.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
+  
  
+  {
+    path: "dashboard",
+    component: HomeComponent
+  },
   {
     path: "movie/register",
     component: MovieRegisterComponent

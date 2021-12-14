@@ -4,48 +4,49 @@ import Movie from "../entity/Movie";
 import MovieRepository from "../repository/MovieRepository";
 import { getCustomRepository } from "typeorm";
 
-import fs from 'fs';
+import fs, { unlink } from 'fs';
+import path from "path";
 
 
 class MovieController {
 
-    async getMovieByID(request: Request, response: Response){
+    async getMovieByID(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
         const { id } = request.params;
         const movie = await movieRepository.findById(id);
 
         return response.json(movie);
-        
+
     }
 
-    async getAllMovies(request: Request, response: Response){
+    async getAllMovies(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
 
         const movie = await movieRepository.findAll();
 
         return response.json(movie);
-        
+
     }
-        
+
     async postMovie(request: Request, response: Response) {
         try {
             const movieRepository = getCustomRepository(MovieRepository);
 
-        
+
             const movieAlreadyExists = await movieRepository.findByName(request.body.name);
 
-            if(typeof movieAlreadyExists !== 'undefined'){
+            if (typeof movieAlreadyExists !== 'undefined') {
                 response.status(409).json({
                     status: "fail",
-                    data : {
+                    data: {
                         title: "Um filme com o mesmo nome já existe no banco de dados!"
                     }
                 })
             }
 
-            
+
             let movie = new Movie();
-            
+
             movie.name = request.body.name;
             movie.synopsis = request.body.synopsis;
             movie.release_date = request.body.release_date;
@@ -54,10 +55,10 @@ class MovieController {
             movie.gender = request.body.gender;
 
             movie = await movieRepository.save(movie);
-    
+
             return response.status(201).json({
                 status: "sucess",
-                data : {
+                data: {
                     title: "Filme cadastrado com sucesso!",
                     movie: movie
                 }
@@ -74,11 +75,12 @@ class MovieController {
 
     }
 
-    public async putMovie(request: Request, response: Response){
+    public async putMovie(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
 
         const { id } = request.params;
         let movie = await movieRepository.findById(id);
+
 
         movie.name = request.body.name;
         movie.synopsis = request.body.synopsis;
@@ -91,26 +93,29 @@ class MovieController {
         response.status(200).json(movie);
     }
 
-    public async deleteMovie(request: Request, response: Response){
+    public async deleteMovie(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
 
 
         const { id } = request.params;
-    
+
         let movie = await movieRepository.findById(id);
-        console.log(movie);
-        
+        console.log("Movie fullpath:"+movie.full_path);
 
-        let full1 = "http://localhost:4001/static/movies/1638757480264-superman-o-retorno.jpg";
-        let resultHandler = function (err) {
-            if (err) {
-                console.log("unlink failed", err);
-            } else {
-                console.log("file deleted");
-            }
-        }
 
-        fs.unlink(full1, resultHandler);
+
+
+
+
+        let fullpath = "./public/static/uploads/";
+
+
+        unlink(path.join(fullpath, movie.poster), (err) => {
+            if (err) throw err;
+            console.log('delete success!', movie.poster);
+        });
+
+
 
 
         delete movie.full_path;
@@ -121,6 +126,7 @@ class MovieController {
             status: "sucess"
         })
     }
+
 }
 
 export default new MovieController();

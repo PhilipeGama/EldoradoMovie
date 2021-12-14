@@ -17,6 +17,7 @@ import { MovieDeleteComponent } from './components/pages/movie/movie-delete/movi
 import { MovieViewComponent } from './components/pages/movie/movie-view/movie-view.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { MovieEditComponent } from './components/pages/movie/movie-edit/movie-edit.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MovieEditComponent } from './components/pages/movie/movie-edit/movie-ed
     MovieViewComponent,
     LoginComponent,
     MovieEditComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
