@@ -19,7 +19,7 @@ router.post('/user', UserController.postUser);
 
 // router.use(Auth);
 router.get('/movie', MovieController.getAllMovies);
-router.get('/deleteimg', MovieController.deleteFile);
+// router.get('/deleteimg', MovieController.deleteFile);
 router.get('/movie/:id', MovieController.getMovieByID);
 router.post('/movie', upload.single('poster'), MovieController.postMovie);
 router.put('/movie', MovieController.putMovie);

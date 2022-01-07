@@ -12,19 +12,6 @@ export class MovieEditComponent implements OnInit {
 
   @Input() movie: Movie;
 
-  
-  // public movie: Movie = {
-
-
-  //   name: "",
-  //   synopsis: "",
-  //   release_date: "",
-  //   box_office: null,
-  //   poster: "",
-  //   created_at: null,
-  //   gender: null
-  // }
-
   public file;
   public genders;
   public hasErrors;
@@ -40,7 +27,6 @@ export class MovieEditComponent implements OnInit {
   ngOnInit(): void {
     this.getGender();
     this.movie.poster="";
-    // console.log(this.movie);
   }
 
   getGender() {
