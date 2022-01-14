@@ -14,7 +14,6 @@ export class MovieListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) { }
 
-
   ngOnInit(): void {
     const id =  this.route.snapshot.params.id;
     this.index();
@@ -23,7 +22,6 @@ export class MovieListComponent implements OnInit {
   index(){
     this.movieService.getAll().subscribe(movies => {
       this.movies = movies;
-      // console.log(movies)
     })
   }
 
@@ -33,11 +31,22 @@ export class MovieListComponent implements OnInit {
     this.showDelete = !this.showDelete;
   }
 
+  toggleDeleteResponse (newShowDeleteValue: boolean) {  
+    this.showDelete = newShowDeleteValue;
+  }
+
   showEdit: boolean = false;
 
 
   toggleEdit () {
     this.showEdit = !this.showEdit;
+    console.log(this.showEdit);
+  }
+
+  closeEditModal (newShowEditValue: boolean) {
+    console.log("closeEditModal",newShowEditValue);
+    this.showEdit = newShowEditValue;
+
   }
 
 

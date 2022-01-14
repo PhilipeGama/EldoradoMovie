@@ -35,21 +35,17 @@
                 <div *ngIf="showDelete">
 
                     <div class="modal">
-                        <p>Deleta Filme</p>
-                        <p>Filme: {{ movie.name }}</p>
-                        <button (click)="delete(movie.id)" (click)="toggleDelete()"  >SIM</button>
-                        <button (click)="toggleDelete()">NÃO</button>
+                        <app-movie-delete [movie]="movie"  (newShowEditEvent)="toggleDeleteResponse($event)"></app-movie-delete>
                     </div>
                     <div (click)="toggleDelete()" class="overlay"></div>
 
                 </div>
 
+
                 <div *ngIf="showEdit">
 
                     <div class="modal-edit">
-                        <button (click)="toggleEdit()">Fechar</button>
-                        <app-movie-edit [movie]="movie" ></app-movie-edit>
-                        <!-- <app-movie-edit ></app-movie-edit> -->
+                        <app-movie-edit [movie]="movie" (newShowEdit)="closeEditModal($event)"></app-movie-edit>
                     </div>
                     <div (click)="toggleEdit()" class="overlay"></div>
 

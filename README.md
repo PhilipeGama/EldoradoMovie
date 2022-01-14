@@ -8,8 +8,7 @@ Precisa ter autenticação com usuario e senha.
 Será feito com NodeJS no servidor, provendo informações em uma API Rest no formato JSON
 e no Front será feito com Angular 8+.
 
-Grupo 3 pessoas
-versionado no Git -> Com Pull Request + CodeReview
+Trabalho Individual
 Monorepo -> API + FRONT = 2 diretorios de projetos em um repositorio
 Evitar usar Bootstrap, mas não é uma regra.
 Preferir usar Flex + SASS, pra praticar.
@@ -47,13 +46,3 @@ Tabela de usuário
 - updated_at
 
 
-git status
-git add -A "Arquivo"
-git commit -m "mensagem"
-git push <remote> <branch>
-git pull <remote> <branch>
-git checkout -b <novo_branch>
-git checkout <branch>
-
-feature/o-que-corrigir -> pull request -> merge (outro integrante) -> master
-ir pro master -> fazer um pull -> criar novos branchs sempre a partir do master

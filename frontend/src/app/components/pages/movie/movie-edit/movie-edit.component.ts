@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Movie from 'src/app/models/movie.model';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -11,6 +11,16 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieEditComponent implements OnInit {
 
   @Input() movie: Movie;
+
+  @Input() showEdit: boolean;
+
+  @Output() newShowEdit = new EventEmitter<boolean>()
+
+  close(){
+    console.log("closeEdit")
+    this.newShowEdit.emit(false);
+  }
+
 
   public file;
   public genders;
@@ -84,6 +94,8 @@ export class MovieEditComponent implements OnInit {
 
   handleFile(arquivo) {
     this.file = arquivo[0] || null;
-  }  
+  }
+
+  
 
 }

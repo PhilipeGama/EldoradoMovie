@@ -1,6 +1,10 @@
-<!-- <div class="modal">
-    <p>movie-delete works!</p>
-    <button [routerLink]="['/movie/list']" (click)="delete()">SIM</button>
-    <button [routerLink]="['/movie/list']">NÃO</button>
+<div class="modal">
+    <div class="title">
+        <h2>Editar Filme</h2>
+        
+        <hr>
+    </div>
+    <h1>{{movie.name}}</h1>
+    <button [routerLink]="['/movie/list']" class="btn btn-sim" (click)="delete()">SIM</button>
+    <button [routerLink]="['/movie/list']" class="btn btn-nao"  (click)="toggleDelete()">NÃO</button>
 </div>
-<div class="overlay"></div> -->
