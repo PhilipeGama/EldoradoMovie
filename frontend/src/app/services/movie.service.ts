@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../environments/environment"
 import { EMPTY, Observable } from 'rxjs';
-import Movie from '../models/movie.model';
-import { map, catchError } from 'rxjs/operators'
+import Movie from '../interfaces/movie.model';
 
 @Injectable({
   providedIn: 'root'

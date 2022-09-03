@@ -4,43 +4,45 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/templates/header/header.component';
-import { CardComponent } from './components/templates/card/card.component';
-import { FooterComponent } from './components/templates/footer/footer.component';
-import { MovieListComponent } from './components/pages/movie/movie-list/movie-list.component';
-import { MovieRegisterComponent } from './components/pages/movie/movie-register/movie-register.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { CardsComponent } from './components/pages/movie/cards/cards.component';
-import { MovieDeleteComponent } from './components/pages/movie/movie-delete/movie-delete.component';
-import { MovieViewComponent } from './components/pages/movie/movie-view/movie-view.component';
-import { LoginComponent } from './components/pages/login/login.component';
-import { MovieEditComponent } from './components/pages/movie/movie-edit/movie-edit.component';
-import { HomeComponent } from './components/home/home.component';
+
+import { CardComponent } from './components/card/card.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+
+import { CardsComponent } from './components/movie/cards/cards.component';
+import { MovieDeleteComponent } from './components/movie/movie-delete/movie-delete.component';
+import { MovieEditComponent } from './components/movie/movie-edit/movie-edit.component';
+import { MovieListComponent } from './components/movie/movie-list/movie-list.component';
+import { MovieRegisterComponent } from './components/movie/movie-register/movie-register.component';
+import { MovieViewComponent } from './components/movie/movie-view/movie-view.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     CardComponent,
     FooterComponent,
+    HeaderComponent,
+    HomeComponent,
+    LoginComponent,
     MovieListComponent,
     MovieRegisterComponent,
     CardsComponent,
     MovieDeleteComponent,
     MovieViewComponent,
-    LoginComponent,
-    MovieEditComponent,
-    HomeComponent,
+    MovieEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

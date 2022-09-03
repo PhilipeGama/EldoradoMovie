@@ -1,26 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import Movie from 'src/app/models/movie.model';
+import { Component, OnInit } from '@angular/core';
+import Movie from 'src/app/interfaces/movie.model';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
-  selector: 'app-movie-edit',
-  templateUrl: './movie-edit.component.html',
-  styleUrls: ['./movie-edit.component.scss']
+  selector: 'app-movie-register',
+  templateUrl: './movie-register.component.html',
+  styleUrls: ['./movie-register.component.scss']
 })
-export class MovieEditComponent implements OnInit {
+export class MovieRegisterComponent implements OnInit {
 
-  @Input() movie: Movie;
+  public movie: Movie = {
 
-  @Input() showEdit: boolean;
 
-  @Output() newShowEdit = new EventEmitter<boolean>()
-
-  close(){
-    console.log("closeEdit")
-    this.newShowEdit.emit(false);
+    name: "",
+    synopsis: "",
+    release_date: "",
+    box_office: null,
+    poster: "",
+    created_at: null,
+    gender: null
   }
-
 
   public file;
   public genders;
@@ -36,12 +36,12 @@ export class MovieEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGender();
-    this.movie.poster="";
   }
 
   getGender() {
     return this.genderService.getAll().subscribe(genders => {
       this.genders = genders;
+      console.log(this.genders)
     })
   }
 
@@ -62,10 +62,11 @@ export class MovieEditComponent implements OnInit {
       formData.append("poster", this.file, this.file['name']);
     }
 
-    this.movieService.update(formData, this.movie.id).subscribe(movie => {
+    this.movieService.create(formData).subscribe(movie => {
       this.hasSuccess = true;
-      this.successMessage = movie.name;
+      this.successMessage = "Filme cadastrado com sucesso!";
 
+      console.log(this.hasSuccess+"-"+this.successMessage)
       this.movie = {
         name: "",
         synopsis: "",
@@ -95,7 +96,5 @@ export class MovieEditComponent implements OnInit {
   handleFile(arquivo) {
     this.file = arquivo[0] || null;
   }
-
-  
-
 }
+
