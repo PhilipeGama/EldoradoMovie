@@ -1,6 +1,6 @@
 import slugify from "slugify";
 import { AfterLoad, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Gender from "./Gender";
+import Gender from "./gender.entity";
 
 import pathConfig from "../../config/path";
 

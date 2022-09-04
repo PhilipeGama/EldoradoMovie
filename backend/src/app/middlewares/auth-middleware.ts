@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 const Auth = (request: Request, response: Response, next: NextFunction) => {
     try {
         const { authorization } = request.headers;
-
         if ( typeof authorization === 'undefined'){
             return response.status(401).json({
                 status: 'fail',
@@ -13,13 +12,9 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
                 }
             })
         }
-
         const token = authorization.split(" ")[1];
-
         const auth = jwt.verify(token, "secret_key");
-
         return next();
-
 
     } catch (error) {
         return response.status(4001).json({
@@ -30,6 +25,5 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
         })
     }
 }
-
 
 export default Auth;

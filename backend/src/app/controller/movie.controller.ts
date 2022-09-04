@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import Movie from "../entity/Movie";
+import Movie from "../entity/movie.entity";
 
-import MovieRepository from "../repository/MovieRepository";
+import MovieRepository from "../repository/movie.repository";
 import { getCustomRepository } from "typeorm";
 
-import fs, { unlink } from 'fs';
+import { unlink } from 'fs';
 import path from "path";
-
 
 class MovieController {
 
@@ -16,25 +15,19 @@ class MovieController {
         const movie = await movieRepository.findById(id);
 
         return response.json(movie);
-
     }
 
     async getAllMovies(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
-
         const movie = await movieRepository.findAll();
-
         return response.json(movie);
-
     }
 
     async postMovie(request: Request, response: Response) {
         try {
             const movieRepository = getCustomRepository(MovieRepository);
-
-
             const movieAlreadyExists = await movieRepository.findByName(request.body.name);
-
+            
             if (typeof movieAlreadyExists !== 'undefined') {
                 response.status(409).json({
                     status: "fail",
@@ -43,7 +36,6 @@ class MovieController {
                     }
                 })
             }
-
 
             let movie = new Movie();
 
@@ -77,10 +69,8 @@ class MovieController {
 
     public async putMovie(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
-
         const { id } = request.params;
         let movie = await movieRepository.findById(id);
-
 
         movie.name = request.body.name;
         movie.synopsis = request.body.synopsis;
@@ -95,28 +85,15 @@ class MovieController {
 
     public async deleteMovie(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
-
-
         const { id } = request.params;
-
         let movie = await movieRepository.findById(id);
         console.log("Movie fullpath:"+movie.full_path);
-
-
-
-
-
-
         let fullpath = "./public/static/uploads/";
-
 
         unlink(path.join(fullpath, movie.poster), (err) => {
             if (err) throw err;
             console.log('delete success!', movie.poster);
         });
-
-
-
 
         delete movie.full_path;
 

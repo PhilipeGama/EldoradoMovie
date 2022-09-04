@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
-import UserRepository from "../repository/UserRepository";
+import UserRepository from "../repository/user.repository";
 import bcrypt from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
@@ -8,12 +8,8 @@ class AuthController {
     async auth(request: Request, response: Response) {
         const userRespository = getCustomRepository(UserRepository);
 
-        console.log(request.body.email);
-        console.log("1");
-
         const user = await userRespository.findByEmail(request.body.email);
 
-    
         if (typeof user === 'undefined') {
             console.log("2")
             return response.json({
@@ -36,7 +32,6 @@ class AuthController {
                 }
             })
         }
-
 
         delete user.password;
         delete user.created_at;
@@ -62,9 +57,6 @@ class AuthController {
 
     async postUser(request: Request, response: Response) {
         const userRespository = getCustomRepository(UserRepository);
-
-
-
     }
 
     async getAllUsers(request: Request, response: Response) {
