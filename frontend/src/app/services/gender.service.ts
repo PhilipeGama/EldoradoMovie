@@ -12,7 +12,7 @@ export class GenderService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Gender> {
-    return this.http.get<Gender>(`${environment.baseApiUrl}/gender`);
+    return this.http.get<Gender>(`${environment.baseApiUrl}/genders`);
   }
 
 }

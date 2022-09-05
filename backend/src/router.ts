@@ -16,7 +16,7 @@ router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.postUser);
 router.put('/users', UserController.putUser);
 
-router.use(Auth);
+//router.use(Auth);
 
 router.get('/genders', GenderController.getAllGender);
 router.post('/genders', GenderController.postGender);

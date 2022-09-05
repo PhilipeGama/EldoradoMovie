@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  Autenticar(user): Observable<User> {
-    return this.http.post<User>(`${environment.baseApiUrl}/auth`, user)
+  authentication(user): Observable<User> {
+    return this.http.post<User>(`${environment.baseApiUrl}/auth`, user);
   }
 }

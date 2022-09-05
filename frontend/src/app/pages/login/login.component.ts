@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   }
 
   logar() {
-    this.authService.Autenticar(this.user).subscribe(user => {
+    this.authService.authentication
+    (this.user).subscribe(user => {
       const token = user.data.token;
 
       
