@@ -7,23 +7,23 @@ import { MovieDeleteComponent } from './components/movie/movie-delete/movie-dele
 import { LoginComponent } from './pages/login/login.component';
 const routes: Routes = [
   {
-    path: "movie/register",
+    path: 'movie/register',
     component: MovieRegisterComponent
   },
   {
-    path: "movie/list",
+    path: 'movie/list',
     component: MovieListComponent
   },
   {
-    path: "movie/cards",
+    path: 'movie/cards',
     component: CardsComponent
   },
   {
-    path: "movie/delete/:id",
+    path: 'movie/delete/:id',
     component: MovieDeleteComponent
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent
   },
 ];

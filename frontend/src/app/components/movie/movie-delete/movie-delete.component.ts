@@ -25,13 +25,13 @@ export class MovieDeleteComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.showEdit);
-    console.log(this.movie.name)
+    console.log(this.movie.name);
   }
 
   delete(){
     const id =  this.route.snapshot.params.id;
     this.movieService.delete(id).subscribe( () => 'Delete sucessful');
-    console.log("Delete: "+id);
+    console.log('Delete: ' + id);
   }
 
 

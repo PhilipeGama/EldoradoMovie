@@ -4,5 +4,5 @@ export default interface User {
     password: string;
     data: {
         token: string;
-    }
+    };
 }

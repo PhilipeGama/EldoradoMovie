@@ -10,14 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user:User = {
-    status: "",
-    email: "",
-    password: "",
+  public user: User = {
+    status: '',
+    email: '',
+    password: '',
     data: {
-      token: ""
+      token: ''
     }
-  }
+  };
 
   public hasErrors;
   public errors = [];
@@ -33,21 +33,21 @@ export class LoginComponent implements OnInit {
     (this.user).subscribe(user => {
       const token = user.data.token;
 
-      
-      window.localStorage.setItem("_token", token);
 
-      this.router.navigate(["/dashboard"])
+      window.localStorage.setItem('_token', token);
+
+      this.router.navigate(['/dashboard']);
 
     }, error => {
       this.hasErrors = true;
 
       if (error.status === 401) {
-        this.errors.push(error.error.data.title)
+        this.errors.push(error.error.data.title);
       }
-      for (let err of error.error.message) {
-        this.errors.push(err.message)
+      for (const err of error.error.message) {
+        this.errors.push(err.message);
       }
-    })
+    });
   }
 
 }

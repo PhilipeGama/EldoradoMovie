@@ -13,19 +13,19 @@ export class MovieRegisterComponent implements OnInit {
   public movie: Movie = {
 
 
-    name: "",
-    synopsis: "",
-    release_date: "",
+    name: '',
+    synopsis: '',
+    release_date: '',
     box_office: null,
-    poster: "",
+    poster: '',
     created_at: null,
     gender: null
-  }
+  };
 
   public file;
   public genders;
   public hasErrors;
-  public errors = []
+  public errors = [];
   public hasSuccess;
   public successMessage;
 
@@ -41,56 +41,56 @@ export class MovieRegisterComponent implements OnInit {
   getGender() {
     return this.genderService.getAll().subscribe(genders => {
       this.genders = genders;
-      console.log(this.genders)
-    })
+      console.log(this.genders);
+    });
   }
 
   addMovie() {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
     formData.append('release_date', this.movie.release_date);
-    
+
     formData.append('box_office', this.movie.box_office.toString());
-   
-  
+
+
     formData.append('gender[id]', this.movie.gender);
 
 
 
     if (this.file) {
-      formData.append("poster", this.file, this.file['name']);
+      formData.append('poster', this.file, this.file.name);
     }
 
     this.movieService.create(formData).subscribe(movie => {
       this.hasSuccess = true;
-      this.successMessage = "Filme cadastrado com sucesso!";
+      this.successMessage = 'Filme cadastrado com sucesso!';
 
-      console.log(this.hasSuccess+"-"+this.successMessage)
+      console.log(this.hasSuccess + '-' + this.successMessage);
       this.movie = {
-        name: "",
-        synopsis: "",
-        release_date: "",
+        name: '',
+        synopsis: '',
+        release_date: '',
         box_office: null,
-        poster: "",
+        poster: '',
         created_at: null,
         gender: null,
 
 
-      }
+      };
 
     }, error => {
-        console.log(error)
+        console.log(error);
         this.hasErrors = true;
 
         if (error.status === 409) {
-          this.errors.push(error.error)
+          this.errors.push(error.error);
         }
-  
-        for(let err of error.error.message) {
+
+        for (const err of error.error.message) {
           this.errors.push(err.message);
         }
-    })
+    });
   }
 
   handleFile(arquivo) {

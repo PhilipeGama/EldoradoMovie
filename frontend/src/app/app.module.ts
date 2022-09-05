@@ -44,7 +44,9 @@ import { MovieViewComponent } from './components/movie/movie-view/movie-view.com
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

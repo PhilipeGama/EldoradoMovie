@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Movie from 'src/app/interfaces/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -10,9 +9,13 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
+  constructor(private route: ActivatedRoute, private movieService: MovieService) { }
+
   public movies;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService) { }
+  showDelete = false;
+
+  showEdit = false;
 
   ngOnInit(): void {
     const id =  this.route.snapshot.params.id;
@@ -22,29 +25,25 @@ export class MovieListComponent implements OnInit {
   index(){
     this.movieService.getAll().subscribe(movies => {
       this.movies = movies;
-    })
+    });
   }
 
-  showDelete: boolean = false;
-
-  toggleDelete () {
+  toggleDelete() {
     this.showDelete = !this.showDelete;
   }
 
-  toggleDeleteResponse (newShowDeleteValue: boolean) {  
+  toggleDeleteResponse(newShowDeleteValue: boolean) {
     this.showDelete = newShowDeleteValue;
   }
 
-  showEdit: boolean = false;
 
-
-  toggleEdit () {
+  toggleEdit() {
     this.showEdit = !this.showEdit;
     console.log(this.showEdit);
   }
 
-  closeEditModal (newShowEditValue: boolean) {
-    console.log("closeEditModal",newShowEditValue);
+  closeEditModal(newShowEditValue: boolean) {
+    console.log('closeEditModal', newShowEditValue);
     this.showEdit = newShowEditValue;
 
   }
@@ -52,7 +51,7 @@ export class MovieListComponent implements OnInit {
 
   delete(id){
     this.movieService.delete(id).subscribe( () => 'Delete sucessful');
-    this.movies = this.movies.filter(item => item.id != id)
+    this.movies = this.movies.filter(item => item.id !== id);
   }
 
 

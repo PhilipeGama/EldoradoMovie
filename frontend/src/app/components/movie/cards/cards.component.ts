@@ -8,7 +8,7 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class CardsComponent implements OnInit {
   public movies;
-  
+
 
   constructor(private movieService: MovieService) { }
 
@@ -20,11 +20,11 @@ export class CardsComponent implements OnInit {
   index(){
     this.movieService.getAll().subscribe(movies => {
       console.log(movies);
-     
+
 
       this.movies = movies;
-     
-    })
+
+    });
   }
 
 }

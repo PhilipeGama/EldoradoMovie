@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from "../../environments/environment"
+import { environment } from '../../environments/environment';
 import { EMPTY, Observable } from 'rxjs';
 import Movie from '../interfaces/movie.model';
 
@@ -11,12 +11,12 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Movie> { 
+  getAll(): Observable<Movie> {
     return this.http.get<Movie>(`${environment.baseApiUrl}/movies`);
   }
 
   create(formData: FormData): Observable<Movie> {
-    return this.http.post<Movie>(`${environment.baseApiUrl}/movies`, formData)
+    return this.http.post<Movie>(`${environment.baseApiUrl}/movies`, formData);
   }
 
   delete(id): Observable<Movie>{
@@ -33,7 +33,7 @@ export class MovieService {
 
 
   errorHandler(e: any): Observable<any> {
-    alert(e.message)
+    alert(e.message);
     return EMPTY;
   }
 }
