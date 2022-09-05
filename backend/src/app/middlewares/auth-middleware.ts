@@ -12,7 +12,7 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
                 }
             })
         }
-        const auth = jwt.verify(authorization, "secret_key");
+        jwt.verify(authorization, "secret_key");
         
         return next();
 

@@ -11,7 +11,6 @@ import GenderController from "src/app/controller/gender.controller";
 const upload = Multer(uploadConfig);
 const router = Router();
 
-
 router.post('/auth', AuthController.auth);
 router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.postUser);
@@ -29,9 +28,5 @@ router.get('/movies/:id', MovieController.getMovieByID);
 router.post('/movies', upload.single('poster'), MovieController.postMovie);
 router.put('/movies', MovieController.putMovie);
 router.delete('/movies/:id',MovieController.deleteMovie);
-
-
-
-
 
 export default router;
