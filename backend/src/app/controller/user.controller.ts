@@ -20,10 +20,10 @@ class UserController {
         });
     }
 
-    async getAllUsers(response: Response){
+    async getAllUsers(request: Request, response: Response){
         const userRespository = getCustomRepository(UserRepository);
         const user = await userRespository.findAll();
-        return response.status(201).json(user);
+        return response.json(user);
     }
 
     async putUser(request: Request, response: Response){

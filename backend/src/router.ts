@@ -18,6 +18,11 @@ router.post('/users', UserController.postUser);
 router.put('/users', UserController.putUser);
 
 router.use(Auth);
+
+router.get('/genders', GenderController.getAllGender);
+router.post('/genders', GenderController.postGender)
+router.put('/genders', GenderController.putGender)
+
 router.get('/movies', MovieController.getAllMovies);
 // router.get('/deleteimg', MovieController.deleteFile);
 router.get('/movies/:id', MovieController.getMovieByID);
@@ -26,7 +31,7 @@ router.put('/movies', MovieController.putMovie);
 router.delete('/movies/:id',MovieController.deleteMovie);
 
 
-router.get('/genders', GenderController.getAllGender);
+
 
 
 export default router;

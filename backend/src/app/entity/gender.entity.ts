@@ -9,21 +9,10 @@ export default class Gender {
     @Column()
     public name: string;
 
-    @CreateDateColumn()
-    public created_at: Date;
+    @CreateDateColumn({name: 'created_at'})
+    public createdAt: Date;
 
-    @UpdateDateColumn()
-    public updated_at: Date;
-
-
-    @BeforeInsert()
-    public createAt(){
-        this.created_at = new Date();
-    }
-
-    @AfterInsert()
-    public updateAt(){
-        this.updated_at = new Date();
-    }
+    @UpdateDateColumn({name: 'updated_at'})
+    public updatedAt: Date;
     
 }

@@ -6,8 +6,6 @@ import pathConfig from "../../config/path";
 
 import slugifyConfig from "../../config/slugify";
 
-
-
 @Entity()
 export default class Movie {
 
@@ -23,20 +21,20 @@ export default class Movie {
     @Column()
     public synopsis: string;
 
-    @Column()
-    public release_date: Date;
+    @Column({name: 'release_date'})
+    public releaseDate: Date;
 
-    @Column()
-    public box_office: number;
+    @Column({ name: 'box_office'})
+    public boxOffice: number;
 
     @Column()
     public poster: string;
 
-    @CreateDateColumn()
-    public created_at?: Date;
+    @CreateDateColumn({name: 'created_at'})
+    public createdAt: Date;
 
-    @UpdateDateColumn()
-    public updated_at?: Date;
+    @UpdateDateColumn({name: 'updated_at'})
+    public updatedAt: Date;
 
     @ManyToOne(() => Gender)
     @JoinColumn({
@@ -46,16 +44,6 @@ export default class Movie {
     public gender: Gender;
 
     public full_path: string;
-
-    @BeforeInsert()
-    public createAt() {
-        this.created_at = new Date();
-    }
-
-    @BeforeUpdate()
-    public updatedAt() {
-        this.updated_at = new Date();
-    }
 
     @BeforeUpdate()
     @BeforeInsert()

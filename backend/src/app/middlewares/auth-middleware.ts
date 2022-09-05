@@ -13,9 +13,9 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
             })
         }
         const auth = jwt.verify(authorization, "secret_key");
-        console.log(auth)
-        return next();
         
+        return next();
+
     } catch (error) {
         return response.status(4001).json({
             status: "fail",

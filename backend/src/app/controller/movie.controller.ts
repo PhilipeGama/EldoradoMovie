@@ -14,10 +14,11 @@ class MovieController {
         const { id } = request.params;
         const movie = await movieRepository.findById(id);
 
+        console.log(movie)
         return response.json(movie);
     }
 
-    async getAllMovies(response: Response) {
+    async getAllMovies(request: Request, response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
         const movie = await movieRepository.findAll();
         return response.json(movie);
@@ -41,8 +42,8 @@ class MovieController {
 
             movie.name = request.body.name;
             movie.synopsis = request.body.synopsis;
-            movie.release_date = request.body.release_date;
-            movie.box_office = request.body.box_office;
+            movie.releaseDate = request.body.releaseDate;
+            movie.boxOffice = request.body.boxOffice;
             movie.poster = request.body.poster;
             movie.gender = request.body.gender;
 
@@ -74,8 +75,8 @@ class MovieController {
 
         movie.name = request.body.name;
         movie.synopsis = request.body.synopsis;
-        movie.release_date = request.body.release_date;
-        movie.box_office = request.body.box_office;
+        movie.releaseDate = request.body.releaseDate;
+        movie.boxOffice = request.body.boxOffice;
         movie.poster = request.body.poster;
 
         movieRepository.update(id, movie);
