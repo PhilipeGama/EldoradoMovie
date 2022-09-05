@@ -1,17 +1,20 @@
 $cor_principal: #1183F5;
 $cor_secundaria: #FF856B;
-$fundo_main: #e7cb7f;
+$fundo_main: #fcfcfc;
 $borda_main: #e4a761;
     
-.main{
-    width: 80vw;
-    margin: auto;
+.main-container {
     background-color: $fundo_main;
-    border: 1px solid $borda_main;
-    margin-top: 50px;
-    min-height: 30vh;
-    border-radius: 5px;
-    padding: 20px;
-    display: table;
+    //border: 1px solid $borda_main;
+    width: 90vw;
+    margin: auto;
+    margin-top: 30px;
 }
+
+
+@media(max-width: 600px) {
+    .main-container {
+        width: 100vw;
+    }
+  }
 

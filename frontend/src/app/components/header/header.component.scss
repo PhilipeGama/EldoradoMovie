@@ -8,15 +8,15 @@ header h1 {
   color: aliceblue;
   padding-top: 15px;
 }
+
 header .container{
   
   display: flex;
   flex-direction: row;
   width: 80%;
   margin: auto;
-
-
 }
+
 header ul {
   display: flex;
   align-items: flex-end ;
@@ -36,5 +36,5 @@ header ul li a {
 }
 
 header ul li a:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: white;
 }

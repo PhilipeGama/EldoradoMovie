@@ -15,12 +15,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
-import { CardsComponent } from './components/movie/cards/cards.component';
-import { MovieDeleteComponent } from './components/movie/movie-delete/movie-delete.component';
-import { MovieEditComponent } from './components/movie/movie-edit/movie-edit.component';
-import { MovieListComponent } from './components/movie/movie-list/movie-list.component';
-import { MovieRegisterComponent } from './components/movie/movie-register/movie-register.component';
-import { MovieViewComponent } from './components/movie/movie-view/movie-view.component';
+import { CardsComponent } from './pages/movie/cards/cards.component';
+import { MovieDeleteComponent } from './pages/movie/movie-delete/movie-delete.component';
+import { MovieEditComponent } from './pages/movie/movie-edit/movie-edit.component';
+import { MovieListComponent } from './pages/movie/movie-list/movie-list.component';
+import { MovieRegisterComponent } from './pages/movie/movie-register/movie-register.component';
+import { MovieViewComponent } from './pages/movie/movie-view/movie-view.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MovieViewComponent } from './components/movie/movie-view/movie-view.com
     CardsComponent,
     MovieDeleteComponent,
     MovieViewComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Filmes</h2>
+  <div class="cards">
+    <div *ngFor="let movie of movies" >
+        <div class="card" style="">
+            <img class="card-img-top" src="https://br.web.img2.acsta.net/medias/nmedia/18/87/08/18/19871827.jpg" alt="Image not found">
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.name }}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a class="btn btn-primary mr-3">Ler mais</a>
+              <a class="btn btn-primary">Ver trailer</a>
+            </div>
+          </div>
+    </div>
+  </div>
+  <app-pagination class="pagination"></app-pagination>  
+</div>
+
