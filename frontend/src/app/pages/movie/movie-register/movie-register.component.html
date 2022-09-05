@@ -7,11 +7,8 @@
             <li *ngFor="let error of errors">{{ error }}</li>
         </ul>
     </div>
-    
+
     <h2>Cadastro de filme</h2>
-    <div class="container-all-form">
-
-
 
         <form action="">
             <div class="form-container">
@@ -45,8 +42,11 @@
                 </select>
             </div>
 
-            <button type="button" class="btn-salvar" (click)="addMovie()">Salvar</button>
+            <div class="btn-group">
+                <button class="btn btn-primary" (click)="addMovie()">Salvar</button>
+                <button class="btn btn-primary" (click)="addMovie()">Limpar</button>
+            </div>
+  
         </form>
     </div>
 
-</div>

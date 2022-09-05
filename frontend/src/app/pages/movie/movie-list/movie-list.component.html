@@ -30,17 +30,17 @@
                     </td>
     
                     <div *ngIf="showDelete">
-                        <div class="modal">
-                            <app-movie-delete [movie]="movie"  (newShowEditEvent)="toggleDeleteResponse($event)"></app-movie-delete>
+                        <div class="modal-delete">
+                            <app-movie-delete [movie]="movie" (newShowEditEvent)="toggleDeleteResponse($event)"></app-movie-delete>
                         </div>
-                        <div (click)="toggleDelete()" class="overlay"></div>
+                        <div (click)="toggleDelete()" class="overlay-1"></div>
                     </div>
 
                     <div *ngIf="showEdit">
                         <div class="modal-edit">
                             <app-movie-edit [movie]="movie" (newShowEdit)="closeEditModal($event)"></app-movie-edit>
                         </div>
-                        <div (click)="toggleEdit()" class="overlay"></div>
+                        <div (click)="toggleEdit()" class="overlay-1"></div>
                     </div>
                 </tr>
             </tbody>

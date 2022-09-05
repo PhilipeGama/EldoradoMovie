@@ -25,7 +25,6 @@ export class MovieListComponent implements OnInit {
   index(){
     this.movieService.getAll().subscribe(movies => {
       this.movies = movies;
-      console.log(movies)
     });
   }
 
