@@ -1,6 +1,5 @@
 <div class="container">
     <h2>Listagem de filmes</h2>
-    <div>
         <div>
             <a [routerLink]="['/movie/register']" class='btn-cadastrar'><i class="fas fa-plus-circle"></i> Novo Filme</a>
         </div>
@@ -17,39 +16,34 @@
                 <tr *ngFor="let movie of movies">
                     <td>{{ movie.id }}</td>
                     <td>{{ movie.name }}</td>
-                    <td>{{ movie.box_office }}</td>
+                    <td>{{ movie.boxOffice }}</td>
                     <td>
                         <a (click)="toggleEdit()" class="btn btn-editar">
                             <i class="fas fa-pencil"></i>
                         </a>
-                        <!-- <a   class="btn btn-visualizar">
+                        <a   class="btn btn-visualizar">
                             <i class="fas fa-eye"></i>
-                        </a> -->
+                        </a> 
                         <a (click)="toggleDelete()" class="btn btn-excluir">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
     
                     <div *ngIf="showDelete">
-    
                         <div class="modal">
                             <app-movie-delete [movie]="movie"  (newShowEditEvent)="toggleDeleteResponse($event)"></app-movie-delete>
                         </div>
                         <div (click)="toggleDelete()" class="overlay"></div>
-    
                     </div>
-    
-    
+
                     <div *ngIf="showEdit">
-    
                         <div class="modal-edit">
                             <app-movie-edit [movie]="movie" (newShowEdit)="closeEditModal($event)"></app-movie-edit>
                         </div>
                         <div (click)="toggleEdit()" class="overlay"></div>
-    
                     </div>
                 </tr>
             </tbody>
         </table>
-    </div>
+ 
 </div>

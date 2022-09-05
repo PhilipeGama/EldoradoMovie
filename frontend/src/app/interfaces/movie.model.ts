@@ -3,7 +3,7 @@ export default interface Movie {
         name: string;
         synopsis: string;
         release_date: string;
-        box_office: number;
+        boxOffice: number;
         poster?: string;
         created_at: Date;
         update_at?: Date;

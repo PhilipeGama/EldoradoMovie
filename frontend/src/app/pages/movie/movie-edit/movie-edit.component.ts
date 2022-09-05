@@ -51,7 +51,7 @@ export class MovieEditComponent implements OnInit {
     formData.append('synopsis', this.movie.synopsis);
     formData.append('release_date', this.movie.release_date);
 
-    formData.append('box_office', this.movie.box_office.toString());
+    formData.append('boxOffice', this.movie.boxOffice.toString());
 
 
     formData.append('gender[id]', this.movie.gender);
@@ -70,7 +70,7 @@ export class MovieEditComponent implements OnInit {
         name: '',
         synopsis: '',
         release_date: '',
-        box_office: null,
+        boxOffice: null,
         poster: '',
         created_at: null,
         gender: null,
