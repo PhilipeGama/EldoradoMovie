@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Movie from 'src/app/interfaces/movie.model';
+import Movie from 'src/app/interfaces/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -15,10 +15,10 @@ export class MovieRegisterComponent implements OnInit {
 
     name: '',
     synopsis: '',
-    release_date: '',
+    releaseDate: '',
     boxOffice: null,
     poster: '',
-    created_at: null,
+   createdAt: null,
     gender: null
   };
 
@@ -49,7 +49,7 @@ export class MovieRegisterComponent implements OnInit {
     const formData: FormData = new FormData();
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
-    formData.append('release_date', this.movie.release_date);
+    formData.append('releaseDate', this.movie.releaseDate);
 
     formData.append('boxOffice', this.movie.boxOffice.toString());
 
@@ -70,10 +70,10 @@ export class MovieRegisterComponent implements OnInit {
       this.movie = {
         name: '',
         synopsis: '',
-        release_date: '',
+        releaseDate: '',
         boxOffice: null,
         poster: '',
-        created_at: null,
+       createdAt: null,
         gender: null,
 
 

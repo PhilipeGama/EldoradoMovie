@@ -2,11 +2,11 @@ export default interface Movie {
         id?: number;
         name: string;
         synopsis: string;
-        release_date: string;
+        releaseDate: string;
         boxOffice: number;
         poster?: string;
-        created_at: Date;
-        update_at?: Date;
+        createdAt?: Date;
+        updatedAt?: Date;
         gender: string;
         full_path?: string;
 }
