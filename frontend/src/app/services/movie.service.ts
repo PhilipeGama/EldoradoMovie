@@ -15,21 +15,19 @@ export class MovieService {
     return this.http.get<Movie>(`${environment.baseApiUrl}/movies`);
   }
 
-  create(formData: FormData): Observable<Movie> {
-    return this.http.post<Movie>(`${environment.baseApiUrl}/movies`, formData);
+  create(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(`${environment.baseApiUrl}/movies`, movie);
   }
-
-  delete(id): Observable<Movie>{
-    const url = `${environment.baseApiUrl}/movies/${id}`;
-    return this.http.delete<Movie>(url);
-  }
-
 
   update(formData: FormData, id: number): Observable<Movie>{
     const url = `${environment.baseApiUrl}/movies/${id}`;
     return this.http.put<Movie>(url, formData);
   }
 
+  delete(id): Observable<Movie>{
+    const url = `${environment.baseApiUrl}/movies/${id}`;
+    return this.http.delete<Movie>(url);
+  }
 
   errorHandler(e: any): Observable<any> {
     alert(e.message);

@@ -9,16 +9,14 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./movie-register.component.scss']
 })
 export class MovieRegisterComponent implements OnInit {
-
+  // TODO 
   public movie: Movie = {
-
-
     name: '',
     synopsis: '',
     releaseDate: '',
     boxOffice: null,
     poster: '',
-   createdAt: null,
+    createdAt: null,
     gender: null
   };
 
@@ -30,9 +28,7 @@ export class MovieRegisterComponent implements OnInit {
   public successMessage;
 
 
-  constructor(private genderService: GenderService, private movieService: MovieService) {
-
-  }
+  constructor(private genderService: GenderService, private movieService: MovieService) {}
 
   ngOnInit(): void {
     this.getGender();
@@ -41,55 +37,34 @@ export class MovieRegisterComponent implements OnInit {
   getGender() {
     return this.genderService.getAll().subscribe(genders => {
       this.genders = genders;
-      console.log(this.genders);
     });
   }
 
   addMovie() {
     const formData: FormData = new FormData();
-    formData.append('name', this.movie.name);
-    formData.append('synopsis', this.movie.synopsis);
-    formData.append('releaseDate', this.movie.releaseDate);
-
-    formData.append('boxOffice', this.movie.boxOffice.toString());
-
-
-    formData.append('gender[id]', this.movie.gender);
-
 
 
     if (this.file) {
       formData.append('poster', this.file, this.file.name);
     }
 
-    this.movieService.create(formData).subscribe(movie => {
+    this.movieService.create(this.movie).subscribe(movie => {
       this.hasSuccess = true;
       this.successMessage = 'Filme cadastrado com sucesso!';
 
-      console.log(this.hasSuccess + '-' + this.successMessage);
       this.movie = {
         name: '',
         synopsis: '',
         releaseDate: '',
         boxOffice: null,
         poster: '',
-       createdAt: null,
+        createdAt: null,
         gender: null,
-
-
       };
 
     }, error => {
         console.log(error);
         this.hasErrors = true;
-
-        if (error.status === 409) {
-          this.errors.push(error.error);
-        }
-
-        for (const err of error.error.message) {
-          this.errors.push(err.message);
-        }
     });
   }
 

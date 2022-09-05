@@ -1,3 +1,5 @@
+import Gender from "./gender.interface";
+
 export default interface Movie {
         id?: number;
         name: string;
@@ -7,6 +9,6 @@ export default interface Movie {
         poster?: string;
         createdAt?: Date;
         updatedAt?: Date;
-        gender: string;
+        gender: Gender;
         full_path?: string;
 }

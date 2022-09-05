@@ -54,7 +54,7 @@ export class MovieEditComponent implements OnInit {
     formData.append('boxOffice', this.movie.boxOffice.toString());
 
 
-    formData.append('gender[id]', this.movie.gender);
+    //formData.append('gender[id]', this.movie.gender);
 
 
 
