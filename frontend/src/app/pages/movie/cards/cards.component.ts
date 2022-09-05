@@ -19,11 +19,7 @@ export class CardsComponent implements OnInit {
 
   index(){
     this.movieService.getAll().subscribe(movies => {
-      console.log(movies);
-
-
       this.movies = movies;
-
     });
   }
 

@@ -69,6 +69,7 @@ export class MovieEditComponent implements OnInit {
       this.movie = {
         name: '',
         synopsis: '',
+            trailer: '',
         releaseDate: '',
         boxOffice: null,
         poster: '',

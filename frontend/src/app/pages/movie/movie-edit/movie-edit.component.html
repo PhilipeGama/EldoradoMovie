@@ -13,6 +13,7 @@
         <div class="success" *ngIf="hasSuccess">{{ successMessage }}</div>
 
         <form action="">
+     
             <div class="form-container">
                 <label for="name">Nome</label>
                 <input type="text" id="name" name="name" [(ngModel)]="movie.name">
@@ -46,7 +47,7 @@
 
             <div class=" btn-group">
                 <button type="button" class="btn btn-primary" (click)="addMovie()">Salvar</button>
-                <button type="button" class="btn btn-primary" (click)="close()">Fechar</button>
+                <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
             </div>
 
         </form>

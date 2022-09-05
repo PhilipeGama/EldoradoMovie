@@ -31,6 +31,9 @@ export default class Movie {
 	@Column()
 	public synopsis: string;
 
+	@Column()
+	public trailer: string;
+
 	@Column({ name: 'release_date' })
 	public releaseDate: Date;
 
@@ -53,7 +56,7 @@ export default class Movie {
 	})
 	public gender: Gender;
 
-	public full_path: string;
+	public fullPath: string;
 
 	@BeforeUpdate()
 	@BeforeInsert()
@@ -63,6 +66,6 @@ export default class Movie {
 
 	@AfterLoad()
 	public setFullPath() {
-		this.full_path = `${pathConfig.fullStaticPath}/${this.poster}`;
+		this.fullPath = `${pathConfig.fullStaticPath}/${this.poster}`;
 	}
 }

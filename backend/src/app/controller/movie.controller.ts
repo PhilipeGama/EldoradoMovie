@@ -43,6 +43,7 @@ class MovieController {
 
 			movie.name = request.body.name;
 			movie.synopsis = request.body.synopsis;
+			movie.trailer = request.body.trailer;
 			movie.releaseDate = request.body.releaseDate;
 			movie.boxOffice = request.body.boxOffice;
 			movie.poster = request.body.poster;
@@ -74,9 +75,11 @@ class MovieController {
 
 		movie.name = request.body.name;
 		movie.synopsis = request.body.synopsis;
+		movie.trailer = request.body.trailer;
 		movie.releaseDate = request.body.releaseDate;
 		movie.boxOffice = request.body.boxOffice;
 		movie.poster = request.body.poster;
+		movie.gender = request.body.gender;
 
 		movieRepository.update(id, movie);
 
@@ -93,7 +96,7 @@ class MovieController {
 			if (err) throw err;
 		});
 
-		delete movie.full_path;
+		delete movie.fullPath;
 
 		console.log(movie);
 		await movieRepository.delete(movie);

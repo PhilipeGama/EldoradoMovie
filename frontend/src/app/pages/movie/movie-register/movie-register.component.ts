@@ -13,6 +13,7 @@ export class MovieRegisterComponent implements OnInit {
   public movie: Movie = {
     name: '',
     synopsis: '',
+    trailer: '',
     releaseDate: '',
     boxOffice: null,
     poster: '',
@@ -22,11 +23,14 @@ export class MovieRegisterComponent implements OnInit {
 
   public file;
   public genders;
-  public hasErrors;
-  public errors = [];
-  public hasSuccess;
-  public successMessage;
 
+  public hasErrors;
+  public hasSuccess;
+
+  public successMessage;
+  public errorMessage;
+
+  filePath: string;
 
   constructor(private genderService: GenderService, private movieService: MovieService) {}
 
@@ -40,21 +44,17 @@ export class MovieRegisterComponent implements OnInit {
     });
   }
 
-  addMovie() {
-    const formData: FormData = new FormData();
-
-
-    if (this.file) {
-      formData.append('poster', this.file, this.file.name);
-    }
-
+  onSave() {
+    console.log(this.movie)
     this.movieService.create(this.movie).subscribe(movie => {
       this.hasSuccess = true;
       this.successMessage = 'Filme cadastrado com sucesso!';
 
+    
       this.movie = {
         name: '',
         synopsis: '',
+        trailer: '',
         releaseDate: '',
         boxOffice: null,
         poster: '',
@@ -65,11 +65,20 @@ export class MovieRegisterComponent implements OnInit {
     }, error => {
         console.log(error);
         this.hasErrors = true;
+        this.errorMessage = error.message;
     });
   }
 
-  handleFile(arquivo) {
-    this.file = arquivo[0] || null;
+
+  handleFile(e) {
+    const file = (e.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.filePath = reader.result as string;
+    }
+
+    reader.readAsDataURL(file)
   }
 }
 
