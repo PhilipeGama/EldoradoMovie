@@ -1,59 +1,68 @@
-import slugify from "slugify";
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Gender from "./gender.entity";
+import slugify from 'slugify';
+import {
+	AfterLoad,
+	BeforeInsert,
+	BeforeUpdate,
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+} from 'typeorm';
+import Gender from './gender.entity';
 
-import pathConfig from "../../config/path";
+import pathConfig from '../../config/path';
 
-import slugifyConfig from "../../config/slugify";
+import slugifyConfig from '../../config/slugify';
 
 @Entity()
 export default class Movie {
+	@PrimaryGeneratedColumn('increment')
+	public id: number;
 
-    @PrimaryGeneratedColumn('increment')
-    public id: number;
+	@Column()
+	public name: string;
 
-    @Column()
-    public name: string;
+	@Column()
+	public slug: string;
 
-    @Column()
-    public slug: string;
+	@Column()
+	public synopsis: string;
 
-    @Column()
-    public synopsis: string;
+	@Column({ name: 'release_date' })
+	public releaseDate: Date;
 
-    @Column({name: 'release_date'})
-    public releaseDate: Date;
+	@Column({ name: 'box_office' })
+	public boxOffice: number;
 
-    @Column({ name: 'box_office'})
-    public boxOffice: number;
+	@Column()
+	public poster: string;
 
-    @Column()
-    public poster: string;
+	@CreateDateColumn({ name: 'created_at' })
+	public createdAt: Date;
 
-    @CreateDateColumn({name: 'created_at'})
-    public createdAt: Date;
+	@UpdateDateColumn({ name: 'updated_at' })
+	public updatedAt: Date;
 
-    @UpdateDateColumn({name: 'updated_at'})
-    public updatedAt: Date;
+	@ManyToOne(() => Gender)
+	@JoinColumn({
+		name: 'gender_id',
+		referencedColumnName: 'id',
+	})
+	public gender: Gender;
 
-    @ManyToOne(() => Gender)
-    @JoinColumn({
-        name: 'gender_id',
-        referencedColumnName: 'id'
-    })
-    public gender: Gender;
+	public full_path: string;
 
-    public full_path: string;
+	@BeforeUpdate()
+	@BeforeInsert()
+	public addSlug() {
+		this.slug = slugify(this.name, slugifyConfig);
+	}
 
-    @BeforeUpdate()
-    @BeforeInsert()
-    public addSlug() {
-        this.slug = slugify(this.name, slugifyConfig)
-    }
-
-    @AfterLoad()
-    public setFullPath() {
-        this.full_path = `${pathConfig.fullStaticPath}/${this.poster}`;
-    }
-
+	@AfterLoad()
+	public setFullPath() {
+		this.full_path = `${pathConfig.fullStaticPath}/${this.poster}`;
+	}
 }

@@ -1,108 +1,106 @@
-import { Request, Response } from "express";
-import Movie from "../entity/movie.entity";
+import { Request, Response } from 'express';
+import Movie from '../entity/movie.entity';
 
-import MovieRepository from "../repository/movie.repository";
-import { getCustomRepository } from "typeorm";
+import MovieRepository from '../repository/movie.repository';
+import { getCustomRepository } from 'typeorm';
 
 import { unlink } from 'fs';
-import path from "path";
+import path from 'path';
 
 class MovieController {
+	async getMovieByID(request: Request, response: Response) {
+		const movieRepository = getCustomRepository(MovieRepository);
+		const { id } = request.params;
+		const movie = await movieRepository.findById(id);
 
-    async getMovieByID(request: Request, response: Response) {
-        const movieRepository = getCustomRepository(MovieRepository);
-        const { id } = request.params;
-        const movie = await movieRepository.findById(id);
+		console.log(movie);
+		return response.json(movie);
+	}
 
-        console.log(movie)
-        return response.json(movie);
-    }
+	async getAllMovies(request: Request, response: Response) {
+		const movieRepository = getCustomRepository(MovieRepository);
+		const movie = await movieRepository.findAll();
+		return response.json(movie);
+	}
 
-    async getAllMovies(request: Request, response: Response) {
-        const movieRepository = getCustomRepository(MovieRepository);
-        const movie = await movieRepository.findAll();
-        return response.json(movie);
-    }
+	async postMovie(request: Request, response: Response) {
+		try {
+			const movieRepository = getCustomRepository(MovieRepository);
+			const movieAlreadyExists = await movieRepository.findByName(
+				request.body.name
+			);
 
-    async postMovie(request: Request, response: Response) {
-        try {
-            const movieRepository = getCustomRepository(MovieRepository);
-            const movieAlreadyExists = await movieRepository.findByName(request.body.name);
-            
-            if (typeof movieAlreadyExists !== 'undefined') {
-                response.status(409).json({
-                    status: "fail",
-                    data: {
-                        title: "Um filme com o mesmo nome já existe no banco de dados!"
-                    }
-                })
-            }
+			if (typeof movieAlreadyExists !== 'undefined') {
+				response.status(409).json({
+					status: 'fail',
+					data: {
+						title: 'Um filme com o mesmo nome já existe no banco de dados!',
+					},
+				});
+			}
 
-            let movie = new Movie();
+			let movie = new Movie();
 
-            movie.name = request.body.name;
-            movie.synopsis = request.body.synopsis;
-            movie.releaseDate = request.body.releaseDate;
-            movie.boxOffice = request.body.boxOffice;
-            movie.poster = request.body.poster;
-            movie.gender = request.body.gender;
+			movie.name = request.body.name;
+			movie.synopsis = request.body.synopsis;
+			movie.releaseDate = request.body.releaseDate;
+			movie.boxOffice = request.body.boxOffice;
+			movie.poster = request.body.poster;
+			movie.gender = request.body.gender;
 
-            movie = await movieRepository.save(movie);
+			movie = await movieRepository.save(movie);
 
-            return response.status(201).json({
-                status: "sucess",
-                data: {
-                    title: "Filme cadastrado com sucesso!",
-                    movie: movie
-                }
-            });
+			return response.status(201).json({
+				status: 'sucess',
+				data: {
+					title: 'Filme cadastrado com sucesso!',
+					movie: movie,
+				},
+			});
+		} catch (error) {
+			return response.status(400).json({
+				status: 'fail',
+				data: {
+					error: error.message,
+				},
+			});
+		}
+	}
 
-        } catch (error) {
-            return response.status(400).json({
-                status: "fail",
-                data: {
-                    error: error.message
-                }
-            })
-        }
+	public async putMovie(request: Request, response: Response) {
+		const movieRepository = getCustomRepository(MovieRepository);
+		const { id } = request.params;
+		const movie = await movieRepository.findById(id);
 
-    }
+		movie.name = request.body.name;
+		movie.synopsis = request.body.synopsis;
+		movie.releaseDate = request.body.releaseDate;
+		movie.boxOffice = request.body.boxOffice;
+		movie.poster = request.body.poster;
 
-    public async putMovie(request: Request, response: Response) {
-        const movieRepository = getCustomRepository(MovieRepository);
-        const { id } = request.params;
-        let movie = await movieRepository.findById(id);
+		movieRepository.update(id, movie);
 
-        movie.name = request.body.name;
-        movie.synopsis = request.body.synopsis;
-        movie.releaseDate = request.body.releaseDate;
-        movie.boxOffice = request.body.boxOffice;
-        movie.poster = request.body.poster;
+		response.status(200).json(movie);
+	}
 
-        movieRepository.update(id, movie);
+	public async deleteMovie(request: Request, response: Response) {
+		const movieRepository = getCustomRepository(MovieRepository);
+		const { id } = request.params;
+		const movie = await movieRepository.findById(id);
+		const fullpath = './public/static/uploads/';
 
-        response.status(200).json(movie);
-    }
+		unlink(path.join(fullpath, movie.poster), (err) => {
+			if (err) throw err;
+		});
 
-    public async deleteMovie(request: Request, response: Response) {
-        const movieRepository = getCustomRepository(MovieRepository);
-        const { id } = request.params;
-        let movie = await movieRepository.findById(id);
-        let fullpath = "./public/static/uploads/";
+		delete movie.full_path;
 
-        unlink(path.join(fullpath, movie.poster), (err) => {
-            if (err) throw err;
-        });
-
-        delete movie.full_path;
-
-        console.log(movie);
-        await movieRepository.delete(movie);
-        response.status(200).json({
-            status: "sucess"
-        })
-    }
-
+		console.log(movie);
+		await movieRepository.delete(movie);
+		response.status(200).json({
+			status: 'sucess',
+		});
+	}
 }
 
 export default new MovieController();
