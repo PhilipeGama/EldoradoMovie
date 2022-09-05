@@ -12,10 +12,10 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
                 }
             })
         }
-        const token = authorization.split(" ")[1];
-        const auth = jwt.verify(token, "secret_key");
+        const auth = jwt.verify(authorization, "secret_key");
+        console.log(auth)
         return next();
-
+        
     } catch (error) {
         return response.status(4001).json({
             status: "fail",

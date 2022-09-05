@@ -1,29 +1,46 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
-import UserRepository from "../repository/user.repository";
 import User from "../entity/user.entity";
+import UserRepository from "../repository/user.repository";
 
 class UserController {
+    constructor(){}
 
     async postUser(request: Request, response: Response){
         const userRespository = getCustomRepository(UserRepository);
-        console.log(request);
         let user = new User();
         user.name = request.body.name;
         user.email = request.body.email;
         user.password = request.body.password;
 
-        await userRespository.save(user);
-
-        return response.json(user);
+        userRespository.save(user).then(user => {
+            return response.json(user);
+        }).catch(error => {
+            return response.json(error.sqlMessage);
+        });
     }
 
-    async getAllUsers(request: Request, response: Response){
- 
+    async getAllUsers(response: Response){
         const userRespository = getCustomRepository(UserRepository);
         const user = await userRespository.findAll();
-        console.log(user)
         return response.status(201).json(user);
+    }
+
+    async putUser(request: Request, response: Response){
+        const userRespository = getCustomRepository(UserRepository);
+
+        const { id } = request.body
+
+        let user = new User();
+        user.name = request.body.name;
+        user.email = request.body.email;
+        user.password = request.body.password;
+
+        userRespository.update(id, user).then(user => {
+            return response.json(user);
+        }).catch(error => {
+            return response.json(error.sqlMessage);
+        });
     }
 }
 

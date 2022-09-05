@@ -15,9 +15,9 @@ const router = Router();
 router.post('/auth', AuthController.auth);
 router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.postUser);
+router.put('/users', UserController.putUser);
 
-
-// router.use(Auth);
+router.use(Auth);
 router.get('/movies', MovieController.getAllMovies);
 // router.get('/deleteimg', MovieController.deleteFile);
 router.get('/movies/:id', MovieController.getMovieByID);

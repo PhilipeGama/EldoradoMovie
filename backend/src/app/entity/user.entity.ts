@@ -1,4 +1,4 @@
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { AfterUpdate, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import bcrypt from 'bcryptjs';
 
 @Entity()
@@ -10,27 +10,18 @@ export default class User {
     @Column()
     public name: string;
 
-    @Column()
+    @Column({unique: true})
     public email: string;
 
     @Column()
     public password: string;
 
-    @CreateDateColumn()
-    public created_at: Date;
+    @CreateDateColumn({name: 'created_at'})
+    public createdAt: Date;
 
-    @UpdateDateColumn()
-    public updated_at: Date;
-
-    @BeforeInsert()
-    public createdAt(){
-        this.created_at = new Date();
-    }
-
-    @BeforeUpdate()
-    public updateAt(){
-        this.updated_at = new Date();
-    }
+    @UpdateDateColumn({name: 'updated_at'})
+    public updatedAt: Date;
+    
 
     @BeforeInsert()
     public async hashPassword(){

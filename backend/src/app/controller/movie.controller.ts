@@ -17,7 +17,7 @@ class MovieController {
         return response.json(movie);
     }
 
-    async getAllMovies(request: Request, response: Response) {
+    async getAllMovies(response: Response) {
         const movieRepository = getCustomRepository(MovieRepository);
         const movie = await movieRepository.findAll();
         return response.json(movie);
@@ -78,7 +78,7 @@ class MovieController {
         movie.box_office = request.body.box_office;
         movie.poster = request.body.poster;
 
-        movieRepository.save(movie);
+        movieRepository.update(id, movie);
 
         response.status(200).json(movie);
     }
@@ -87,12 +87,10 @@ class MovieController {
         const movieRepository = getCustomRepository(MovieRepository);
         const { id } = request.params;
         let movie = await movieRepository.findById(id);
-        console.log("Movie fullpath:"+movie.full_path);
         let fullpath = "./public/static/uploads/";
 
         unlink(path.join(fullpath, movie.poster), (err) => {
             if (err) throw err;
-            console.log('delete success!', movie.poster);
         });
 
         delete movie.full_path;
