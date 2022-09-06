@@ -29,19 +29,20 @@
                         </a>
                     </td>
     
-                    <div *ngIf="showDelete">
-                        <div class="modal-delete">
+                    <ng-container *ngIf="showDelete">
+                        <div class="modal-delete" @modal>
                             <app-movie-delete [movie]="movie" (newShowEditEvent)="toggleDeleteResponse($event)"></app-movie-delete>
                         </div>
-                        <div (click)="toggleDelete()" class="overlay-1"></div>
-                    </div>
+                        <div @overlay (click)="toggleDelete()" class="overlay-1" @overlay></div>
+                    </ng-container>
 
-                    <div *ngIf="showEdit">
-                        <div class="modal-edit">
+                    <ng-container *ngIf="showEdit">
+                        <div class="modal-edit" @modal>
                             <app-movie-edit [movie]="movie" (newShowEdit)="closeEditModal($event)"></app-movie-edit>
                         </div>
-                        <div (click)="toggleEdit()" class="overlay-1"></div>
-                    </div>
+                        <div (click)="toggleEdit()" class="overlay-1" @overlay></div>
+                    </ng-container>
+
                 </tr>
             </tbody>
         </table>

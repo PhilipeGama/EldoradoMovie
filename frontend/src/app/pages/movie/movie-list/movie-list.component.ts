@@ -1,11 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition } from '@angular/animations';
+
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  styleUrls: ['./movie-list.component.scss'],
+  animations: [
+    trigger('overlay', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('250ms', style({ opacity: .5 })),
+      ]),
+      transition(':leave', [
+        animate('500ms', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('modal', [
+      transition(':enter', [
+        style({ top: -999 }),
+          animate('500ms', style({ top: '50%' })),
+      ]),
+      transition(':leave', [
+        animate('250ms', style({ top: -999 }))
+      ])
+    ]),
+  ]
 })
 export class MovieListComponent implements OnInit {
 

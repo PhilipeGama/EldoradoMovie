@@ -22,7 +22,7 @@ import { MovieListComponent } from './pages/movie/movie-list/movie-list.componen
 import { MovieRegisterComponent } from './pages/movie/movie-register/movie-register.component';
 import { MovieViewComponent } from './pages/movie/movie-view/movie-view.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

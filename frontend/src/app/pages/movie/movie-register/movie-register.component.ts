@@ -17,7 +17,6 @@ export class MovieRegisterComponent implements OnInit {
     releaseDate: '',
     boxOffice: null,
     poster: '',
-    createdAt: null,
     gender: null
   };
 
@@ -58,7 +57,6 @@ export class MovieRegisterComponent implements OnInit {
         releaseDate: '',
         boxOffice: null,
         poster: '',
-        createdAt: null,
         gender: null,
       };
 
