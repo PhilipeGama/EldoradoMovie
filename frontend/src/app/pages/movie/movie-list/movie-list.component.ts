@@ -43,6 +43,8 @@ export class MovieListComponent implements OnInit {
 
   showEdit = false;
 
+  selectMovie;
+
   ngOnInit(): void {
     const id =  this.route.snapshot.params.id;
     this.index();
@@ -54,32 +56,30 @@ export class MovieListComponent implements OnInit {
     });
   }
 
-  toggleDelete() {
+  toggleDelete(i: number) {
+    if(i == -1) {
+      this.selectMovie = null;
+    }
+    this.selectMovie = this.movies[i];
     this.showDelete = !this.showDelete;
   }
 
-  toggleDeleteResponse(newShowDeleteValue: boolean) {
+  toggleCloseDelete(newShowDeleteValue: boolean) {
     this.showDelete = newShowDeleteValue;
   }
 
-
-  toggleEdit() {
+  toggleEdit(i: number) {
+    if(i == -1) {
+      this.selectMovie = null;
+    }
+    this.selectMovie = this.movies[i];
     this.showEdit = !this.showEdit;
-    console.log(this.showEdit);
   }
 
-  closeEditModal(newShowEditValue: boolean) {
+  toggleCloseEdit(newShowEditValue: boolean) {
     console.log('closeEditModal', newShowEditValue);
     this.showEdit = newShowEditValue;
 
   }
-
-
-  delete(id){
-    this.movieService.delete(id).subscribe( () => 'Delete sucessful');
-    this.movies = this.movies.filter(item => item.id !== id);
-  }
-
-
 
 }

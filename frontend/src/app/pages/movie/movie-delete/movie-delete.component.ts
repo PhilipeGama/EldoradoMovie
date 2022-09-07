@@ -15,19 +15,18 @@ export class MovieDeleteComponent implements OnInit {
 
   @Input() movie: Movie;
 
-  @Input() showEdit: boolean;
-
-  @Output() newShowEditEvent = new EventEmitter<boolean>();
+  @Output() closeModal = new EventEmitter<boolean>();
 
   toggleDelete(){
-    this.newShowEditEvent.emit(false);
+    this.closeModal.emit(false);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.movie)
+  }
 
-  delete(){
-    const id =  this.route.snapshot.params.id;
-    this.movieService.delete(id).subscribe( () => 'Delete sucessful');
+  onDelete(){
+    this.movieService.delete(this.movie.id).subscribe( () => this.closeModal.emit(false));
   }
 
 

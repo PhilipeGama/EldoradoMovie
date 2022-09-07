@@ -1,56 +1,57 @@
 <div class="container">
-    <div class="title">
-        <h2>Editar Filme</h2>
-    </div>
-
-    <div class="container-all-form">
-       
-        <div class="errors" *ngIf="hasErrors">
-            <ul>
-                <li *ngFor="let error of errors">{{ error }}</li>
-            </ul>
-        </div>
-        <div class="success" *ngIf="hasSuccess">{{ successMessage }}</div>
+    <h2>Editar de filme</h2>
 
         <form action="">
-     
-            <div class="form-container">
+            <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" id="name" name="name" [(ngModel)]="movie.name">
-            </div>
-            <div class="form-container">
+                <input class="form-control" type="input"  id="name" name="name" placeholder="Digite nome do filme" [(ngModel)]="movie.name">
+              </div>
+
+            <div class="form-group">
                 <label for="synopsis">Sinopse</label>
-                <textarea id="synopsis" name="synopsis" [(ngModel)]="movie.synopsis"></textarea>
-            </div>
-            <div class="form-container">
-                <label for="releaseDate">Data de Lançamento</label>
-                <input type="date" id="releaseDate" name="releaseDate" [(ngModel)]="movie.releaseDate">
-            </div>
-            <div class="form-container">
-                <label for="boxOffice">Bilheteria</label>
-                <input type="text" id="boxOffice" name="boxOffice" [(ngModel)]="movie.boxOffice">
-            </div>
-            <div class="form-container">
-                <label for="poster">Imagem</label>
-                <input type="file" id="poster" name="poster" [(ngModel)]="movie.poster" (change)="handleFile($event.target.files)">
+                <textarea class="form-control" id="synopsis" name="synopsis" placeholder="Digite a sinopse do filme"  [(ngModel)]="movie.synopsis"></textarea>
             </div>
 
-            <div class="form-container">
+            <div class="form-group">
+                <label for="name">Trailer</label>
+                <input class="form-control" type="input"  id="trailer" name="trailer" placeholder="URL do trailer" [(ngModel)]="movie.trailer">
+            </div>
+
+            <div class="form-group">
+                <label for="releaseDate">Data de Lançamento</label>
+                <input class="form-control" type="date" id="releaseDate" name="releaseDate" [(ngModel)]="movie.releaseDate">
+            </div>
+       
+            <div class="form-group">
+                <label for="boxOffice">Bilheteria</label>
+                <input type="text" class="form-control" id="boxOffice" name="boxOffice" placeholder="Digite a bilheteria do filme" [(ngModel)]="movie.boxOffice">
+            </div>
+
+
+            <div class="form-group">
+                <label for="poster">Selecione uma imagem:</label>
+                <input class="form-control-file" type="file" id="poster" name="poster" (change)="handleFile($event)" #imageRef>
+            </div>
+            <div class="img-container">
+                <img [src]="filePath">
+            </div>
+
+            <div class="form-group">
                 <label for="gender">Genero</label>
-                <select id="gender" name="gender" [(ngModel)]="movie.gender">
-                    <option value="">Selecione</option>
-                    <option *ngFor="let gender of genders" [value]="gender.id">
-                        {{ gender.name }}
-                    </option>
+                <select class="custom-select" id="gender" name="gender" [(ngModel)]="movie.gender">
+                    <ng-container *ngFor="let gender of genders">
+                        <option [ngValue]="movie.gender">
+                            {{ gender.name }}
+                        </option>
+                    </ng-container>
                 </select>
             </div>
 
-            <div class=" btn-group">
-                <button type="button" class="btn btn-primary" (click)="addMovie()">Salvar</button>
-                <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
+            <div class="btn-group">
+                <button class="btn btn-primary" (click)="onEdit()">Editar</button>
+                <button class="btn btn-warning" (click)="onClose()">Fechar</button>
             </div>
-
+  
         </form>
     </div>
 
-</div>

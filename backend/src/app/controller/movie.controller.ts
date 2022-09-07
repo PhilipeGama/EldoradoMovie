@@ -13,7 +13,6 @@ class MovieController {
 		const { id } = request.params;
 		const movie = await movieRepository.findById(id);
 
-		console.log(movie);
 		return response.json(movie);
 	}
 
@@ -24,6 +23,7 @@ class MovieController {
 	}
 
 	async postMovie(request: Request, response: Response) {
+		console.log(request.body.poster);
 		try {
 			const movieRepository = getCustomRepository(MovieRepository);
 			const movieAlreadyExists = await movieRepository.findByName(
@@ -52,18 +52,11 @@ class MovieController {
 			movie = await movieRepository.save(movie);
 
 			return response.status(201).json({
-				status: 'sucess',
-				data: {
-					title: 'Filme cadastrado com sucesso!',
-					movie: movie,
-				},
+				title: 'Filme cadastrado com sucesso!',
 			});
 		} catch (error) {
 			return response.status(400).json({
-				status: 'fail',
-				data: {
-					error: error.message,
-				},
+				error: error.message,
 			});
 		}
 	}
@@ -73,17 +66,31 @@ class MovieController {
 		const { id } = request.params;
 		const movie = await movieRepository.findById(id);
 
+		console.log(request.body);
+		const fullpath = './public/static/uploads/';
+
+		if (request.body.poster) {
+			unlink(path.join(fullpath, movie.poster), (err) => {
+				if (err) console.log(err);
+			});
+			movie.poster = request.body.poster;
+		}
+
 		movie.name = request.body.name;
 		movie.synopsis = request.body.synopsis;
 		movie.trailer = request.body.trailer;
 		movie.releaseDate = request.body.releaseDate;
 		movie.boxOffice = request.body.boxOffice;
-		movie.poster = request.body.poster;
+
 		movie.gender = request.body.gender;
+
+		delete movie.fullPath;
 
 		movieRepository.update(id, movie);
 
-		response.status(200).json(movie);
+		response.status(200).json({
+			title: 'Filme atualizado com successo',
+		});
 	}
 
 	public async deleteMovie(request: Request, response: Response) {
@@ -92,16 +99,16 @@ class MovieController {
 		const movie = await movieRepository.findById(id);
 		const fullpath = './public/static/uploads/';
 
-		unlink(path.join(fullpath, movie.poster), (err) => {
-			if (err) throw err;
-		});
-
 		delete movie.fullPath;
 
-		console.log(movie);
-		await movieRepository.delete(movie);
+		await movieRepository.delete({ id: movie.id }).then(() => {
+			unlink(path.join(fullpath, movie.poster), (err) => {
+				if (err) throw err;
+			});
+		});
+
 		response.status(200).json({
-			status: 'sucess',
+			title: 'Filme deletado com sucesso',
 		});
 	}
 }

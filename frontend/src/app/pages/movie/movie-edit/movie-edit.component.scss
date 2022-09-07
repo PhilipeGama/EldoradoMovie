@@ -35,3 +35,17 @@
     padding-right: 10px;
     gap: 10px;
 }
+
+
+.img-container {
+    width: 100px;
+    border: 1px solid;
+}
+
+img {
+    width: 100%;
+}
+
+.img-group {
+    display: flex;
+}

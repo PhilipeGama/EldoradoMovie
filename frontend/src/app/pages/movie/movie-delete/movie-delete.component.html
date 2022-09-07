@@ -2,7 +2,7 @@
     <h2>Deletar Filme</h2>
     <p>{{movie.name}}</p>
     <div class="btn-group">
-        <button [routerLink]="['/movie/list']" class="btn btn-primary" (click)="delete()">Sim</button>
+        <button [routerLink]="['/movie/list']" class="btn btn-primary" (click)="onDelete()">Sim</button>
         <button [routerLink]="['/movie/list']" class="btn btn-danger"  (click)="toggleDelete()">Não</button>
     </div>
 </div>

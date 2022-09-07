@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import Movie from 'src/app/interfaces/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -19,24 +19,28 @@ export class MovieEditComponent implements OnInit {
 
   @Input() showEdit: boolean;
 
-  @Output() newShowEdit = new EventEmitter<boolean>();
+  @Output() closeModal = new EventEmitter<boolean>();
+
+  @ViewChildren('imageRef') imageRef;
 
 
-  public file;
+
   public genders;
   public hasErrors;
   public errors = [];
   public hasSuccess;
   public successMessage;
 
-  close(){
-    console.log('closeEdit');
-    this.newShowEdit.emit(false);
-  }
+  file;
+  filePath;
+
+  fullPath;
+
 
   ngOnInit(): void {
     this.getGender();
-    this.movie.poster = '';
+    console.log(this.movie)
+    this.filePath = this.movie.fullPath;
   }
 
   getGender() {
@@ -45,58 +49,50 @@ export class MovieEditComponent implements OnInit {
     });
   }
 
-  addMovie() {
-    const formData: FormData = new FormData();
+  onEdit() {
+    let formData: FormData = new FormData();
+    formData.append('id', this.movie.id.toString());
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
+    formData.append('trailer', this.movie.trailer);
     formData.append('releaseDate', this.movie.releaseDate);
-
     formData.append('boxOffice', this.movie.boxOffice.toString());
-
-
-    //formData.append('gender[id]', this.movie.gender);
-
-
+    formData.append('gender', this.movie.gender.id.toString())
 
     if (this.file) {
-      formData.append('poster', this.file, this.file.name);
+      formData.append("poster", this.file, this.file['name']);
     }
 
-    this.movieService.update(formData, this.movie.id).subscribe(movie => {
+
+    this.movieService.update(formData).subscribe(response => {
+      this.hasErrors = false;
       this.hasSuccess = true;
-      this.successMessage = movie.name;
-
-      this.movie = {
-        name: '',
-        synopsis: '',
-            trailer: '',
-        releaseDate: '',
-        boxOffice: null,
-        poster: '',
-       createdAt: null,
-        gender: null,
-
-
-      };
+      this.successMessage = 'Filme cadastrado com sucesso!';
 
     }, error => {
-        console.log(error);
-        this.hasErrors = true;
+      this.hasSuccess = false;
+      this.successMessage = '';
 
-        if (error.status === 409) {
-          this.errors.push(error.error);
-        }
-
-        for (const err of error.error.message) {
-          this.errors.push(err.message);
-        }
+      this.hasErrors = true;
     });
+    this.closeModal.emit(false);
   }
 
-  handleFile(arquivo) {
-    this.file = arquivo[0] || null;
+  handleFile(e) {
+    this.file = (e.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+
+    console.log(e)
+    reader.onload = () => {
+      this.filePath = reader.result as string;
+    }
+
+    reader.readAsDataURL(this.file)
   }
 
+  onClose(): void {
+    this.closeModal.emit(false);
+  }
 
 
 }

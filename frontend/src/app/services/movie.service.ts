@@ -15,13 +15,14 @@ export class MovieService {
     return this.http.get<Movie>(`${environment.baseApiUrl}/movies`);
   }
 
-  create(movie: Movie): Observable<Movie> {
+  create(movie: FormData): Observable<Movie> {
     return this.http.post<Movie>(`${environment.baseApiUrl}/movies`, movie);
   }
 
-  update(formData: FormData, id: number): Observable<Movie>{
+  update(movie: FormData): Observable<Movie>{
+    const id = movie.get('id')
     const url = `${environment.baseApiUrl}/movies/${id}`;
-    return this.http.put<Movie>(url, formData);
+    return this.http.put<Movie>(url, movie);
   }
 
   delete(id): Observable<Movie>{

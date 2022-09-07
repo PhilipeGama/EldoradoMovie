@@ -41,7 +41,7 @@ export default class Movie {
 	public boxOffice: number;
 
 	@Column()
-	public poster: string;
+	public poster?: string;
 
 	@CreateDateColumn({ name: 'created_at' })
 	public createdAt: Date;
