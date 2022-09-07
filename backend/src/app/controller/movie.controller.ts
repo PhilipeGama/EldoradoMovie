@@ -31,10 +31,7 @@ class MovieController {
 
 			if (typeof movieAlreadyExists !== 'undefined') {
 				response.status(409).json({
-					status: 'fail',
-					data: {
-						title: 'Um filme com o mesmo nome já existe no banco de dados!',
-					},
+					title: 'Um filme com o mesmo nome já existe no banco de dados!',
 				});
 			}
 
