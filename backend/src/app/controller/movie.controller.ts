@@ -23,7 +23,6 @@ class MovieController {
 	}
 
 	async postMovie(request: Request, response: Response) {
-		console.log(request.body.poster);
 		try {
 			const movieRepository = getCustomRepository(MovieRepository);
 			const movieAlreadyExists = await movieRepository.findByName(
@@ -71,7 +70,7 @@ class MovieController {
 
 		if (request.body.poster) {
 			unlink(path.join(fullpath, movie.poster), (err) => {
-				if (err) console.log(err);
+				err;
 			});
 			movie.poster = request.body.poster;
 		}

@@ -2,16 +2,16 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand" >Eldorado Movies</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" [ngClass]="{'show': navBarOpen}" id="navbarNav" @navbar>
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['movie/cards']">Filmes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['movie/list']">Cadastrar Filmes</a>
+        <a class="nav-link" [routerLink]="['movie/list']">Gerenciar filmes</a>
       </li>
     </ul>
   </div>

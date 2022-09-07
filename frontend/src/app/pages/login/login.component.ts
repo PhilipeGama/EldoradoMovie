@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logar() {
+  onLogin() {
     this.authService.authentication
     (this.user).subscribe(user => {
       const token = user.data.token;
@@ -50,4 +50,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onExit(){
+    
+  }
 }

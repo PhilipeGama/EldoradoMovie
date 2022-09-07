@@ -11,7 +11,8 @@
         <form action="">
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input class="form-control" type="input"  id="name" name="name" placeholder="Digite nome do filme" [(ngModel)]="movie.name">
+                <input class="form-control" type="input"  id="name" name="name" placeholder="Digite nome do filme" [(ngModel)]="movie.name" required [minLength]="5"> 
+                <span hidden="name.valid"></span>
               </div>
 
             <div class="form-group">
