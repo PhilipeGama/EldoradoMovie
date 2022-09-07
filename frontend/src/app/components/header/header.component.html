@@ -11,10 +11,10 @@
         <a class="nav-link" [routerLink]="['']">Filmes</a>
       </li>
       <li class="nav-item" *ngIf="role==='admin'">
-        <a class="nav-link" [routerLink]="['movie/list']">Gerenciar filmes</a>
+        <a class="nav-link" [routerLink]="['movies']">Gerenciar filmes</a>
       </li>
-      <li class="nav-item" *ngIf="role==='admin'">
-        <a class="nav-link" [routerLink]="['login']">Login</a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>

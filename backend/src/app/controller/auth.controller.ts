@@ -43,7 +43,7 @@ class AuthController {
 
 		user.token = token;
 		return response.json({
-			user,
+			...user,
 		});
 	}
 }

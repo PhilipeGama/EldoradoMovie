@@ -20,15 +20,24 @@ export class HeaderComponent implements OnInit {
   public currentUser;
   navBarOpen = false;
 
-  role = 'admin';
+  role = 'user';
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    console.log('navbar')
+    this.auth.getUser().subscribe(user => {
+      if(user){
+        this.role = user.role
+      }
+    })
+  }
+
+  onLogout(){
+    console.log('logout...')
   }
 
   toggleNavbar(){
     this.navBarOpen = !this.navBarOpen;
+
   }
 }
