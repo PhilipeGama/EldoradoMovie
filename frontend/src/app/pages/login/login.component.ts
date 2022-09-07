@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import IUser from 'src/app/interfaces/user.interface';
 import User from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,13 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user: User = {
-    status: '',
+  public user: IUser = {
     email: '',
+    role: '',
     password: '',
-    data: {
-      token: ''
-    }
+    token: '',
   };
 
   public hasErrors;
@@ -29,14 +28,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.authService.authentication
+    this.authService.singIn
     (this.user).subscribe(user => {
-      const token = user.data.token;
+      const token = user.token;
 
+      this.authService.setUser(user);
 
       window.localStorage.setItem('_token', token);
-
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['']);
 
     }, error => {
       this.hasErrors = true;

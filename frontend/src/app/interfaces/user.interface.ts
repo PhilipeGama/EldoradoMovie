@@ -1,8 +1,7 @@
-export default interface User {
-    status: string;
+export default interface IUser {
+    id?: string;
     email: string;
     password: string;
-    data: {
-        token: string;
-    };
+    role: string;
+    token: string;
 }

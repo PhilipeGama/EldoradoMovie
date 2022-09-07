@@ -20,6 +20,11 @@ export default class User {
 	public email: string;
 
 	@Column()
+	public role: string;
+
+	token: string;
+
+	@Column()
 	public password: string;
 
 	@CreateDateColumn({ name: 'created_at' })

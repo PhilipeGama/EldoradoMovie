@@ -9,6 +9,7 @@ class UserController {
 		const user = new User();
 		user.name = request.body.name;
 		user.email = request.body.email;
+		user.role = request.body.role;
 		user.password = request.body.password;
 
 		userRespository

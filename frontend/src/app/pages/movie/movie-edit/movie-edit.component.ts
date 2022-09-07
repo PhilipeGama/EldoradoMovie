@@ -38,12 +38,11 @@ export class MovieEditComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getGender();
-    console.log(this.movie)
+    this.fetchGender();
     this.filePath = this.movie.fullPath;
   }
 
-  getGender() {
+  fetchGender() {
     return this.genderService.getAll().subscribe(genders => {
       this.genders = genders;
     });

@@ -41,12 +41,9 @@ class AuthController {
 			expiresIn: '1d',
 		});
 
+		user.token = token;
 		return response.json({
-			status: 'sucess',
-			data: {
-				user,
-				token,
-			},
+			user,
 		});
 	}
 }

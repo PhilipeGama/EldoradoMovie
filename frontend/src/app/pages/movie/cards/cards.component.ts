@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -9,15 +10,14 @@ import { MovieService } from 'src/app/services/movie.service';
 export class CardsComponent implements OnInit {
   public movies;
 
-
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService,private auth: AuthService) { }
 
 
   ngOnInit(): void {
-    this.index();
+    this.fecthMovies();
   }
 
-  index(){
+  fecthMovies(){
     this.movieService.getAll().subscribe(movies => {
       this.movies = movies;
     });

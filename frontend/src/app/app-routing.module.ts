@@ -3,9 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieListComponent } from './pages/movie/movie-list/movie-list.component';
 import { MovieRegisterComponent} from './pages/movie/movie-register/movie-register.component';
 import { CardsComponent } from './pages/movie/cards/cards.component';
-import { MovieDeleteComponent } from './pages/movie/movie-delete/movie-delete.component';
 import { LoginComponent } from './pages/login/login.component';
+
 const routes: Routes = [
+  {
+    path: '',
+    component: CardsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'movie/register',
     component: MovieRegisterComponent
@@ -13,18 +21,6 @@ const routes: Routes = [
   {
     path: 'movie/list',
     component: MovieListComponent
-  },
-  {
-    path: 'movie/cards',
-    component: CardsComponent
-  },
-  {
-    path: 'movie/delete/:id',
-    component: MovieDeleteComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   },
 ];
 

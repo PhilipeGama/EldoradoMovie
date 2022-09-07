@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import User from '../interfaces/user.interface';
+import IUser from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  currentUser = new BehaviorSubject<IUser>(null);
+
   constructor(private http: HttpClient) { }
 
-  authentication(user): Observable<User> {
-    return this.http.post<User>(`${environment.baseApiUrl}/auth`, user);
+  singIn(user): Observable<IUser> {
+    return this.http.post<IUser>(`${environment.baseApiUrl}/auth`, user);
+  }
+
+  setUser(user: IUser){
+    this.currentUser.next(user);
+  }
+
+  getUser(): BehaviorSubject<IUser>{
+    return this.currentUser;
   }
 }

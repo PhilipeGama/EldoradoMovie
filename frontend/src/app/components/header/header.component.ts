@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import IUser from 'src/app/interfaces/user.interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +17,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public currentUser;
+  navBarOpen = false;
+
+  role = 'admin';
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    console.log('navbar')
   }
-
-  navBarOpen = false;
 
   toggleNavbar(){
     this.navBarOpen = !this.navBarOpen;

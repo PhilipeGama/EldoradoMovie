@@ -6,8 +6,6 @@ import {
   style,
   animate,
   transition } from '@angular/animations';
-
-
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -35,22 +33,24 @@ import {
 })
 export class MovieListComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService
+  ) { }
 
   public movies;
 
   showDelete = false;
-
   showEdit = false;
 
   selectMovie;
 
   ngOnInit(): void {
     const id =  this.route.snapshot.params.id;
-    this.index();
+    this.fetcMovies();
   }
 
-  index(){
+  fetcMovies(){
     this.movieService.getAll().subscribe(movies => {
       this.movies = movies;
     });
@@ -66,6 +66,7 @@ export class MovieListComponent implements OnInit {
 
   toggleCloseDelete(newShowDeleteValue: boolean) {
     this.showDelete = newShowDeleteValue;
+    this.fetcMovies()
   }
 
   toggleEdit(i: number) {
@@ -77,9 +78,8 @@ export class MovieListComponent implements OnInit {
   }
 
   toggleCloseEdit(newShowEditValue: boolean) {
-    console.log('closeEditModal', newShowEditValue);
     this.showEdit = newShowEditValue;
-
+    this.fetcMovies()
   }
 
 }

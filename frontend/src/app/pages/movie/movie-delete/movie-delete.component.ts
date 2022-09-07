@@ -11,7 +11,7 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieDeleteComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private  movieService: MovieService) { }
+  constructor(private  movieService: MovieService){}
 
   @Input() movie: Movie;
 
@@ -21,12 +21,10 @@ export class MovieDeleteComponent implements OnInit {
     this.closeModal.emit(false);
   }
 
-  ngOnInit(): void {
-    console.log(this.movie)
-  }
+  ngOnInit(): void {}
 
   onDelete(){
-    this.movieService.delete(this.movie.id).subscribe( () => this.closeModal.emit(false));
+    this.movieService.delete(this.movie.id).subscribe(() => this.closeModal.emit(false));
   }
 
 
