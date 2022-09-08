@@ -1,9 +1,7 @@
 <div class="container">
     <form>
         <div class="alert alert-danger" *ngIf="hasErrors">
-            <ng-container *ngFor="let error of errors">
-                {{ error }}
-            </ng-container>
+            {{ errorMessage }}
         </div>
 
         <h1>Login</h1>

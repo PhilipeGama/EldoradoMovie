@@ -21,7 +21,7 @@
                         <a (click)="toggleEdit(i)" class="btn btn-editar">
                             <i class="fas fa-pencil"></i>
                         </a>
-                        <a   class="btn btn-visualizar">
+                        <a  (click)="toggleView(i)" class="btn btn-visualizar">
                             <i class="fas fa-eye"></i>
                         </a> 
                         <a (click)="toggleDelete(i)" class="btn btn-excluir">
@@ -34,6 +34,20 @@
         <app-pagination class="pagination"></app-pagination>
 </div>
 
+<ng-container *ngIf="showEdit">
+    <div class="modal-edit" @modal>
+        <app-movie-edit [movie]="selectMovie" (closeModal)="toggleCloseEdit($event)"></app-movie-edit>
+    </div>
+    <div (click)="toggleEdit(-1)" class="overlay-1" @overlay></div>
+</ng-container>
+
+<ng-container *ngIf="showView">
+    <div class="modal-view" @modal>
+        <app-movie-view [movie]="selectMovie" (closeModal)="toggleCloseView($event)"></app-movie-view>
+    </div>
+    <div (click)="toggleView(-1)" class="overlay-1" @overlay></div>
+</ng-container>
+
 <ng-container *ngIf="showDelete">
     <div class="modal-delete" @modal>
         <app-movie-delete [movie]="selectMovie" (closeModal)="toggleCloseDelete($event)"></app-movie-delete>
@@ -41,10 +55,4 @@
     <div @overlay (click)="toggleDelete(-1)" class="overlay-1" @overlay></div>
 </ng-container>
 
-<ng-container *ngIf="showEdit">
-    <div class="modal-edit" @modal>
-        <app-movie-edit [movie]="selectMovie" (closeModal)="toggleCloseEdit($event)"></app-movie-edit>
-    </div>
-    <div (click)="toggleEdit(-1)" class="overlay-1" @overlay></div>
-</ng-container>
 

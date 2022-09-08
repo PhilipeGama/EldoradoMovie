@@ -40,8 +40,10 @@ export class MovieListComponent implements OnInit {
 
   public movies;
 
-  showDelete = false;
   showEdit = false;
+  showView = false;
+  showDelete = false;
+
 
   selectMovie;
 
@@ -70,6 +72,19 @@ export class MovieListComponent implements OnInit {
       this.showDelete = showDelete;
     });
   }
+
+  toggleView(i: number) {
+    if(i == -1) {
+      this.selectMovie = null;
+    }
+    this.selectMovie = this.movies[i];
+    this.showView = !this.showView;
+  }
+
+  toggleCloseView(showView: boolean) { 
+      this.showView = showView;
+  }
+
 
   toggleEdit(i: number) {
     if(i == -1) {

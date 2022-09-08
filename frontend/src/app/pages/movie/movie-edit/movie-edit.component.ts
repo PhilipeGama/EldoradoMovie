@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
-import Movie from 'src/app/interfaces/movie.interface';
+import Movie from 'src/app/model/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
 

@@ -1,6 +1,5 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import IUser from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class HeaderComponent implements OnInit {
   public currentUser;
   navBarOpen = false;
 
-  role = 'user';
+  role = 'admin';
   isLogged = false;
 
   constructor(private auth: AuthService) { }

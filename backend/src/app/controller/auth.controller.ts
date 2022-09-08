@@ -8,13 +8,23 @@ class AuthController {
 	async auth(request: Request, response: Response) {
 		const userRespository = getCustomRepository(UserRepository);
 
+		if (request.body.email == '' || request.body.password == '') {
+			return response.status(401).json({
+				fail: 'fail',
+				data: {
+					title: 'Campo Login e Senha obrigatório!',
+				},
+			});
+		}
+
 		const user = await userRespository.findByEmail(request.body.email);
 
 		if (typeof user === 'undefined') {
-			return response.json({
+			console.log(user);
+			return response.status(401).json({
 				fail: 'fail',
 				data: {
-					title: 'Email não encontrado',
+					title: 'Login/Senha inválida!',
 				},
 			});
 		}
@@ -28,7 +38,7 @@ class AuthController {
 			return response.status(401).json({
 				fail: 'fail',
 				data: {
-					title: 'Login/Senha inválida.',
+					title: 'Login/Senha inválida!',
 				},
 			});
 		}

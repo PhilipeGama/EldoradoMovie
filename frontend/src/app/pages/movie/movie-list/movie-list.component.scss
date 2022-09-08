@@ -17,7 +17,6 @@
     z-index: 11;
 }
 
-
 .modal-edit {
     background: #fff;
     border-radius: 8px;
@@ -29,17 +28,6 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
-}
-
-.overlay-1 {
-    background: #222222d6;
-    height: 100vh;
-    left: 0;
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 10;
 }
 
 .fa-pencil {

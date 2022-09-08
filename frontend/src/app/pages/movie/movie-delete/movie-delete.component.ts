@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Movie from 'src/app/interfaces/movie.interface';
+import Movie from 'src/app/model/movie.interface';
 import { MovieService } from 'src/app/services/movie.service';
 
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import Movie from 'src/app/model/movie.interface';
 
 @Component({
   selector: 'app-movie-view',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieViewComponent implements OnInit {
 
+  @Input() movie: Movie;
+
+  @Output() closeModal = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleClose(){
+    this.closeModal.emit(false)
   }
 
 }

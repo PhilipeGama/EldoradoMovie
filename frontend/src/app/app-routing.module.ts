@@ -26,14 +26,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: CardsComponent
       },
       {
-        path: 'view-movie',
+        path: 'view-movie/:id',
         component: MovieViewComponent
       },
       {
