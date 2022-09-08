@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import {
 	Column,
 	CreateDateColumn,
@@ -11,7 +12,8 @@ export default class Gender {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
-	@Column()
+	@Column({ nullable: false, unique: true })
+	@IsNotEmpty()
 	public name: string;
 
 	@CreateDateColumn({ name: 'created_at' })

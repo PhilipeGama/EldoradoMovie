@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import Movie from 'src/app/model/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -42,7 +43,7 @@ export class MovieRegisterComponent implements OnInit {
     });
   }
 
-  onSave() {
+  onSave(form: NgForm) {
     let formData: FormData = new FormData();
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
@@ -58,6 +59,7 @@ export class MovieRegisterComponent implements OnInit {
     this.movieService.create(formData).subscribe(response => {
 
       this.clearForm();
+      form.form.reset();
 
       this.hasErrors = false;
       this.errorMessage = '';
@@ -86,7 +88,7 @@ export class MovieRegisterComponent implements OnInit {
     reader.readAsDataURL(this.file)
   }
 
-  onClearForm(){
+  onClearForm(form: NgForm){
     this.movie = {
       name: '',
       synopsis: '',
@@ -96,7 +98,7 @@ export class MovieRegisterComponent implements OnInit {
       poster: '',
       gender: null,
     };
-
+ 
     this.hasSuccess = false;
     this.successMessage = null;
 
@@ -104,6 +106,7 @@ export class MovieRegisterComponent implements OnInit {
     this.errorMessage = null;
 
     this.filePath = null;
+    form.form.reset();
   }
 
   clearForm(){

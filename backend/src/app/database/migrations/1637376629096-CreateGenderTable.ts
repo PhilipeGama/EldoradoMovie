@@ -17,6 +17,7 @@ export class CreateGenderTable1637376629096 implements MigrationInterface {
 						name: 'name',
 						type: 'varchar(30)',
 						isNullable: false,
+						isUnique: true,
 					},
 					{
 						name: 'created_at',

@@ -1,3 +1,4 @@
+import { json } from 'body-parser';
 import { Request, Response } from 'express';
 
 import { getCustomRepository } from 'typeorm';
@@ -17,9 +18,18 @@ class GenderController {
 
 		const gender = new Gender();
 		gender.name = request.body.name;
-		genderRepository.save(gender);
-
-		return response.json(gender);
+		genderRepository
+			.save(gender)
+			.then(() => {
+				return response.status(201).json({
+					title: 'Gênero cadastrado com sucesso!',
+				});
+			})
+			.catch((error) => {
+				return response.status(400).json({
+					title: error.sqlMessage,
+				});
+			});
 	}
 
 	async putGender(request: Request, response: Response) {
@@ -28,7 +38,18 @@ class GenderController {
 		const { id } = request.body;
 		const gender = new Gender();
 		gender.name = request.body.name;
-		genderRepository.update(id, gender);
+		genderRepository
+			.update(id, gender)
+			.then(() => {
+				return response.status(200).json({
+					title: 'Gênero atualizado com sucesso!',
+				});
+			})
+			.catch((error) => {
+				return response.status(401).json({
+					title: error.sqlMessage,
+				});
+			});
 
 		return response.json(gender);
 	}

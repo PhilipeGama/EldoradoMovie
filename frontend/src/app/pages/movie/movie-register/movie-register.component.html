@@ -105,8 +105,8 @@
             </div>
 
             <div class="btn-group">
-                <button class="btn btn-primary" (click)="onSave()" [disabled]="form.invalid">Salvar</button>
-                <button class="btn btn-warning" (click)="onClearForm()">Limpar</button>
+                <button class="btn btn-primary" (click)="onSave(form)" [disabled]="form.invalid">Salvar</button>
+                <button class="btn btn-warning" (click)="onClearForm(form)">Limpar</button>
             </div>
   
         </form>

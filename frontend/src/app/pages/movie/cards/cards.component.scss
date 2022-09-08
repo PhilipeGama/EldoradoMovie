@@ -12,7 +12,10 @@
 
 .card {
     width: 18rem; 
-
+    min-height: 404px;
+    p {
+        min-height: 72px;
+    }
 }
 
 .container-img {

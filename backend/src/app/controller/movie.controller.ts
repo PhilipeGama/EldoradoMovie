@@ -35,7 +35,7 @@ class MovieController {
 				});
 			}
 
-			let movie = new Movie();
+			const movie = new Movie();
 
 			movie.name = request.body.name;
 			movie.synopsis = request.body.synopsis;
@@ -45,7 +45,15 @@ class MovieController {
 			movie.poster = request.body.poster;
 			movie.gender = request.body.gender;
 
-			movie = await movieRepository.save(movie);
+			await movieRepository
+				.save(movie)
+				.then()
+				.catch((error) => {
+					console.log(error);
+					return response.status(201).json({
+						title: 'Erro ao cadastrar filme!',
+					});
+				});
 
 			return response.status(201).json({
 				title: 'Filme cadastrado com sucesso!',
