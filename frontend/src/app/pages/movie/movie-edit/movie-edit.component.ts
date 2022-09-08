@@ -10,20 +10,13 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieEditComponent implements OnInit {
 
-
-  constructor(private genderService: GenderService, private movieService: MovieService) {
-
-  }
+  constructor(private genderService: GenderService, private movieService: MovieService) {}
 
   @Input() movie: Movie;
 
   @Input() showEdit: boolean;
 
   @Output() closeModal = new EventEmitter<boolean>();
-
-  @ViewChildren('imageRef') imageRef;
-
-
 
   public genders;
   public hasErrors;
@@ -33,9 +26,7 @@ export class MovieEditComponent implements OnInit {
 
   file;
   filePath;
-
   fullPath;
-
 
   ngOnInit(): void {
     this.fetchGender();
@@ -62,7 +53,6 @@ export class MovieEditComponent implements OnInit {
       formData.append("poster", this.file, this.file['name']);
     }
 
-
     this.movieService.update(formData).subscribe(response => {
       this.hasErrors = false;
       this.hasSuccess = true;
@@ -81,7 +71,6 @@ export class MovieEditComponent implements OnInit {
     this.file = (e.target as HTMLInputElement).files[0];
     const reader = new FileReader();
 
-    console.log(e)
     reader.onload = () => {
       this.filePath = reader.result as string;
     }

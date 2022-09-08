@@ -64,9 +64,11 @@ export class MovieListComponent implements OnInit {
     this.showDelete = !this.showDelete;
   }
 
-  toggleCloseDelete(newShowDeleteValue: boolean) {
-    this.showDelete = newShowDeleteValue;
-    this.fetcMovies()
+  toggleCloseDelete(showDelete: boolean) {
+    this.movieService.getAll().subscribe(movies => {
+      this.movies = movies;
+      this.showDelete = showDelete;
+    });
   }
 
   toggleEdit(i: number) {
@@ -77,9 +79,8 @@ export class MovieListComponent implements OnInit {
     this.showEdit = !this.showEdit;
   }
 
-  toggleCloseEdit(newShowEditValue: boolean) {
-    this.showEdit = newShowEditValue;
-    this.fetcMovies()
+  toggleCloseEdit(showEdit: boolean) { 
+      this.showEdit = showEdit;
   }
 
 }

@@ -28,7 +28,7 @@ class AuthController {
 			return response.status(401).json({
 				fail: 'fail',
 				data: {
-					title: 'Senha inválida',
+					title: 'Login/Senha inválida.',
 				},
 			});
 		}

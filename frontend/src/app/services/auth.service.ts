@@ -22,7 +22,7 @@ export class AuthService {
     this.currentUser.next(user);
   }
 
-  getUser(): Subject<IUser>{
+  getUser(): BehaviorSubject<IUser>{
     return this.currentUser;
   }
 

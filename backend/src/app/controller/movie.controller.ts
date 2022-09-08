@@ -62,7 +62,6 @@ class MovieController {
 		const { id } = request.params;
 		const movie = await movieRepository.findById(id);
 
-		console.log(request.body);
 		const fullpath = './public/static/uploads/';
 
 		if (request.body.poster) {

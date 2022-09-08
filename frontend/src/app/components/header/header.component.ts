@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   navBarOpen = false;
 
   role = 'user';
+  isLogged = false;
 
   constructor(private auth: AuthService) { }
 
@@ -28,12 +29,14 @@ export class HeaderComponent implements OnInit {
     this.auth.getUser().subscribe(user => {
       if(user){
         this.role = user.role
+        this.isLogged = true;
       }
     })
   }
 
   onLogout(){
     console.log('logout...')
+    this.isLogged = false;
   }
 
   toggleNavbar(){

@@ -5,8 +5,14 @@ import { CardsComponent } from './pages/movie/cards/cards.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MovieRegisterComponent } from './pages/movie/movie-register/movie-register.component';
+import { AuthGuard } from './services/auth.guard';
+import { MovieViewComponent } from './pages/movie/movie-view/movie-view.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '',
     component: HomeComponent,
@@ -14,6 +20,21 @@ const routes: Routes = [
       {
         path: '',
         component: CardsComponent
+      },
+    ]
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: CardsComponent
+      },
+      {
+        path: 'view-movie',
+        component: MovieViewComponent
       },
       {
         path: 'register-movie',
@@ -25,15 +46,12 @@ const routes: Routes = [
       },
     ]
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
