@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -52,7 +51,6 @@ export class CardsComponent implements OnInit {
   }
 
   toggleView(index: number){
-    console.log(index)
     if(index == -1){
       this.selectMovie = null;
     } else {

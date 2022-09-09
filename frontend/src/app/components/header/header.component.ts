@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   public currentUser;
   navBarOpen = false;
 
-  role = 'admin';
+  role = 'user';
   isLogged = false;
 
   constructor(private auth: AuthService) { }
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(){
-    console.log('logout...')
+    this.auth.logout();
     this.isLogged = false;
   }
 

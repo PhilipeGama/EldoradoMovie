@@ -48,12 +48,11 @@ class AuthController {
 		delete user.updatedAt;
 
 		const token = sign({ user }, 'secret_key', {
-			expiresIn: '1d',
+			expiresIn: '30m',
 		});
 
-		user.token = token;
 		return response.json({
-			...user,
+			token,
 		});
 	}
 }
