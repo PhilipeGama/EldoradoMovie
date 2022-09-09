@@ -16,7 +16,7 @@ const Auth = (request: Request, response: Response, next: NextFunction) => {
 
 		return next();
 	} catch (error) {
-		return response.status(4001).json({
+		return response.status(401).json({
 			status: 'fail',
 			data: {
 				title: 'Você não está autorizado a acessar essa página.',

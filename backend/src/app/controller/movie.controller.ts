@@ -19,7 +19,7 @@ class MovieController {
 	async getAllMovies(request: Request, response: Response) {
 		const movieRepository = getCustomRepository(MovieRepository);
 		const movie = await movieRepository.findAll();
-		return response.json(movie);
+		return response.status(200).json(movie);
 	}
 
 	async postMovie(request: Request, response: Response) {
@@ -30,7 +30,7 @@ class MovieController {
 			);
 
 			if (typeof movieAlreadyExists !== 'undefined') {
-				response.status(409).json({
+				return response.status(500).json({
 					title: 'Um filme com o mesmo nome já existe no banco de dados!',
 				});
 			}
@@ -47,19 +47,18 @@ class MovieController {
 
 			await movieRepository
 				.save(movie)
-				.then()
-				.catch((error) => {
-					console.log(error);
+				.then(() => {
 					return response.status(201).json({
-						title: 'Erro ao cadastrar filme!',
+						title: 'Filme cadastrado com sucesso!',
+					});
+				})
+				.catch((error) => {
+					return response.status(404).json({
+						title: error.message,
 					});
 				});
-
-			return response.status(201).json({
-				title: 'Filme cadastrado com sucesso!',
-			});
 		} catch (error) {
-			return response.status(400).json({
+			return response.status(404).json({
 				error: error.message,
 			});
 		}

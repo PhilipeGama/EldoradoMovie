@@ -7,7 +7,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ movie.name }}</h5>
               <p class="card-text">{{ movie.synopsis | slice:0:100 }} ...</p>
-              <a class="btn btn-primary mr-3" (click)="toggleView(i)">Ler mais</a>
+              <a class="btn btn-primary mr-3" style="color:white" (click)="toggleView(i)">Ler mais</a>
               <a class="btn btn-primary" [href]="movie.trailer" target="_blank">Ver trailer</a>
             </div>
           </div>

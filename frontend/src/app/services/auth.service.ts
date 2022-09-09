@@ -31,7 +31,7 @@ export class AuthService {
     }, error => {
       this.hasErrors.next(true);
       if (error.status === 401) {
-        this.errorMessage.next(error.error.data.title);
+        this.errorMessage.next(error.error.title);
       }
     });
   }

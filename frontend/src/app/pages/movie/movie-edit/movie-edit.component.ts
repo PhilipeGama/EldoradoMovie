@@ -29,7 +29,9 @@ export class MovieEditComponent implements OnInit {
   fullPath;
 
   ngOnInit(): void {
+    console.log()
     this.fetchGender();
+   
     this.filePath = this.movie.fullPath;
   }
 
@@ -82,5 +84,11 @@ export class MovieEditComponent implements OnInit {
     this.closeModal.emit(false);
   }
 
+  parseDate(dateString: string): Date {
+    if (dateString) {
+        return new Date(dateString);
+    }
+    return null;
+}
 
 }

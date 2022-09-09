@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { CardComponent } from './components/card/card.component';
@@ -23,6 +23,7 @@ import { MovieRegisterComponent } from './pages/movie/movie-register/movie-regis
 import { MovieViewComponent } from './pages/movie/movie-view/movie-view.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorizationInterceptor } from './services/authorization.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

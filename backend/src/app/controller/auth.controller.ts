@@ -10,22 +10,15 @@ class AuthController {
 
 		if (request.body.email == '' || request.body.password == '') {
 			return response.status(401).json({
-				fail: 'fail',
-				data: {
-					title: 'Campo Login e Senha obrigatório!',
-				},
+				title: 'Campo Login e Senha obrigatório!',
 			});
 		}
 
 		const user = await userRespository.findByEmail(request.body.email);
 
 		if (typeof user === 'undefined') {
-			console.log(user);
 			return response.status(401).json({
-				fail: 'fail',
-				data: {
-					title: 'Login/Senha inválida!',
-				},
+				title: 'Login/Senha inválida!',
 			});
 		}
 
@@ -36,10 +29,7 @@ class AuthController {
 
 		if (!passwordIsValid) {
 			return response.status(401).json({
-				fail: 'fail',
-				data: {
-					title: 'Login/Senha inválida!',
-				},
+				title: 'Login/Senha inválida!',
 			});
 		}
 
