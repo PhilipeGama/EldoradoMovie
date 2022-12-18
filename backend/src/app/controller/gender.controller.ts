@@ -1,4 +1,3 @@
-import { json } from 'body-parser';
 import { Request, Response } from 'express';
 
 import { getCustomRepository } from 'typeorm';
