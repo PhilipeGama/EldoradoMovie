@@ -1,10 +1,10 @@
 {
-  "name": "eldoradomovie",
+  "name": "crud-movie-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node_modules/ts-node-dev/lib/bin.js -r tsconfig-paths/register --respawn --transpile-only --ignore-watch --no-notify src/server.ts",
+    "dev": "node_modules/ts-node-dev/lib/bin.js -r tsconfig-paths/register --respawn --transpile-only --ignore-watch --no-notify src/app.ts",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.3",
     "mysql": "^2.18.1",
@@ -24,6 +25,7 @@
     "yup-locale-pt": "^0.0.9"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.6",

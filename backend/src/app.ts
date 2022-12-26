@@ -6,7 +6,7 @@ import { createConnection } from 'typeorm';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import router from './router';
+import router from './app/routers/router';
 
 const app = express();
 
@@ -21,6 +21,7 @@ app.use(
 
 createConnection().then(() => 'Database was connected successful!');
 app.use(router);
+//console.log(MOVIES);
 
 app.listen(process.env.PORT, () => {
 	console.log(`PORT ${process.env.PORT}`);

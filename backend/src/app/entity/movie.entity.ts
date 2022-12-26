@@ -1,19 +1,15 @@
-import slugify from 'slugify';
 import {
-	AfterLoad,
-	BeforeInsert,
-	BeforeUpdate,
-	Column,
+	AfterLoad, Column,
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
 	ManyToOne,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn,
+	UpdateDateColumn
 } from 'typeorm';
 import Gender from './gender.entity';
 
-import pathConfig from '../../config/path';
+import pathConfig from '../utils/path';
 
 // import slugifyConfig from '../../config/slugify';
 // import { text } from 'body-parser';

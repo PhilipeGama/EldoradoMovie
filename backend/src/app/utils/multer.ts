@@ -1,5 +1,5 @@
-import { resolve } from 'path';
 import Multer from 'multer';
+import { resolve } from 'path';
 
 import slugify from 'slugify';
 import slugifyConfig from './slugify';

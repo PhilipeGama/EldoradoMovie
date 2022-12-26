@@ -2,11 +2,11 @@ import { Router } from 'express';
 import Multer from 'multer';
 
 import AuthController from 'src/app/controller/auth.controller';
-import uploadConfig from './config/multer';
+import GenderController from 'src/app/controller/gender.controller';
 import MovieController from 'src/app/controller/movie.controller';
 import UserController from 'src/app/controller/user.controller';
-import Auth from './app/middlewares/auth-middleware';
-import GenderController from 'src/app/controller/gender.controller';
+import Auth from '../middlewares/auth-middleware';
+import uploadConfig from '../utils/multer';
 
 const upload = Multer(uploadConfig);
 const router = Router();
