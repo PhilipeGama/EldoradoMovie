@@ -9,16 +9,15 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="input"  id="email" name="email" placeholder="Digite seu email" [(ngModel)]="user.email">
-            </div>
-
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             <label for="email">Password</label>
             <input class="form-control" type="password"  id="password" name="password" placeholder="Digite sua senha" [(ngModel)]="user.password">
-            </div>
+        </div>
     
-            <div class="btn-group">
-                <button class="btn btn-primary" (click)="onLogin()">Entrar</button>
-                <button class="btn btn-danger" (click)="onExit()">Sair</button>
-            </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" (click)="onLogin()">Entrar</button>
+            <button class="btn btn-danger">Cadastrar-se</button>
+        </div>
     </form>
 </div>

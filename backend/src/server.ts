@@ -1,7 +1,10 @@
-import express from 'express';
-import { createConnection } from 'typeorm';
-import { resolve } from 'path';
 import cors from 'cors';
+import express from 'express';
+import { resolve } from 'path';
+import { createConnection } from 'typeorm';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import router from './router';
 
@@ -19,6 +22,6 @@ app.use(
 createConnection().then(() => 'Database was connected successful!');
 app.use(router);
 
-app.listen(4001);
-
-console.log('PORT 4001');
+app.listen(process.env.PORT, () => {
+	console.log(`PORT ${process.env.PORT}`);
+});
