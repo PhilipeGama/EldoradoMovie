@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import Movie from '../entity/movie.entity';
 
-import MovieRepository from '../repository/movie.repository';
 import { getCustomRepository } from 'typeorm';
+import MovieRepository from '../repository/movie.repository';
 
 import { unlink } from 'fs';
 import path from 'path';
+import { staticPath } from '../utils/path';
 
 class MovieController {
 	async getMovieByID(request: Request, response: Response) {
@@ -65,53 +66,64 @@ class MovieController {
 	}
 
 	public async putMovie(request: Request, response: Response) {
-		const movieRepository = getCustomRepository(MovieRepository);
-		const { id } = request.params;
-		const movie = await movieRepository.findById(id);
+		try {
+			const movieRepository = getCustomRepository(MovieRepository);
+			const { id } = request.params;
+			const movie = await movieRepository.findById(id);
+			
+			if (request.body.poster) {
+				unlink(path.join(staticPath, movie.poster), (err) => {
+					err;
+				});
+				movie.poster = request.body.poster;
+			}
 
-		const fullpath = './public/static/uploads/';
+			movie.name = request.body.name;
+			movie.synopsis = request.body.synopsis;
+			movie.trailer = request.body.trailer;
+			movie.releaseDate = request.body.releaseDate;
+			movie.boxOffice = request.body.boxOffice;
 
-		if (request.body.poster) {
-			unlink(path.join(fullpath, movie.poster), (err) => {
-				err;
+			movie.gender = request.body.gender;
+
+			delete movie.fullPath;
+
+			movieRepository.update(id, movie);
+
+			response.status(200).json({
+				title: 'Filme atualizado com successo',
 			});
-			movie.poster = request.body.poster;
+		} catch (error) {
+			return response.status(404).json({
+				error: error.message,
+			});
 		}
-
-		movie.name = request.body.name;
-		movie.synopsis = request.body.synopsis;
-		movie.trailer = request.body.trailer;
-		movie.releaseDate = request.body.releaseDate;
-		movie.boxOffice = request.body.boxOffice;
-
-		movie.gender = request.body.gender;
-
-		delete movie.fullPath;
-
-		movieRepository.update(id, movie);
-
-		response.status(200).json({
-			title: 'Filme atualizado com successo',
-		});
+		
 	}
 
 	public async deleteMovie(request: Request, response: Response) {
-		const movieRepository = getCustomRepository(MovieRepository);
-		const { id } = request.params;
-		const movie = await movieRepository.findById(id);
-		const fullpath = './public/static/uploads/';
-
-		delete movie.fullPath;
-
-		await movieRepository.delete({ id: movie.id }).then(() => {
-			unlink(path.join(fullpath, movie.poster), (err) => {
-				if (err) throw err;
+		try {
+			const movieRepository = getCustomRepository(MovieRepository);
+			const { id } = request.params;
+			const movie = await movieRepository.findById(id);
+	
+			delete movie.fullPath;
+	
+			await movieRepository.delete({ id: movie.id }).then(() => {
+				unlink(path.join(staticPath, movie.poster), (err) => {
+					err;
+				});
 			});
-		});
+	
+			response.status(200).json({
+				title: 'Filme deletado com sucesso',
+			});
+		} catch (error) {
+			return response.status(404).json({
+				error: error.message,
+			});
+		}
 
-		response.status(200).json({
-			title: 'Filme deletado com sucesso',
-		});
 	}
 }
 

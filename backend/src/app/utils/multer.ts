@@ -2,11 +2,12 @@ import Multer from 'multer';
 import { resolve } from 'path';
 
 import slugify from 'slugify';
+import { staticPath } from './path';
 import slugifyConfig from './slugify';
 
 export default {
 	storage: Multer.diskStorage({
-		destination: resolve(__dirname, '..', '..', 'public', 'static', 'uploads'),
+		destination: resolve(staticPath),
 		filename(req, file, callback) {
 			const hash = new Date().getTime();
 			const ext = file.originalname.split('.')[1];

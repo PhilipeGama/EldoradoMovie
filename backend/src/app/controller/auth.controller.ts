@@ -1,8 +1,8 @@
+import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
+import { sign } from 'jsonwebtoken';
 import { getCustomRepository } from 'typeorm';
 import UserRepository from '../repository/user.repository';
-import bcrypt from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
 
 class AuthController {
 	async auth(request: Request, response: Response) {
@@ -38,7 +38,7 @@ class AuthController {
 		delete user.updatedAt;
 
 		const token = sign({ user }, 'secret_key', {
-			expiresIn: '30m',
+			expiresIn: '1d',
 		});
 
 		return response.json({

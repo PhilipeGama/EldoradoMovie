@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import Gender from './gender.entity';
 
-import pathConfig from '../utils/path';
+import { fullStaticPath } from '../utils/path';
 
 // import slugifyConfig from '../../config/slugify';
 // import { text } from 'body-parser';
@@ -69,6 +69,6 @@ export default class Movie {
 
 	@AfterLoad()
 	public setFullPath() {
-		this.fullPath = `${pathConfig.fullStaticPath}/${this.poster}`;
+		this.fullPath = `${fullStaticPath}/${this.poster}`;
 	}
 }
