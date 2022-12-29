@@ -8,7 +8,7 @@
   <div class="box-container">
     <div>
       <p>Trailer</p>
-      <div class="box"></div>
+      <div class="box" [innerHTML]="html_trailer"></div>
     </div>
     <div>
       <p>Imagem</p>
@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+  <br><br>
   <div class="btn-group">
     <button class="btn btn-danger" (click)="toggleClose()">Fechar</button>
   </div>

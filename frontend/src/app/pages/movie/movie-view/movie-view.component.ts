@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import Movie from 'src/app/model/movie.interface';
 
 @Component({
@@ -12,9 +13,11 @@ export class MovieViewComponent implements OnInit {
 
   @Output() closeModal = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
+  html_trailer;
   ngOnInit(): void {
+    this.html_trailer = this.sanitizer.bypassSecurityTrustHtml(this.movie.trailer)
   }
 
   toggleClose(){
