@@ -1,7 +1,7 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { EMPTY, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import Movie from '../model/movie.interface';
 
 @Injectable({
@@ -11,8 +11,12 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Movie> {
-    return this.http.get<Movie>(`${environment.baseApiUrl}/movies`);
+  getAll(page: number, limit?: number): Observable<Movie> {
+    let params = new HttpParams();
+    limit = 2;
+    params = params.append('page', page.toString())
+    params = params.append('limit', limit.toString())
+    return this.http.get<Movie>(`${environment.baseApiUrl}/movies`, { params });
   }
 
   create(movie: FormData): Observable<Movie> {

@@ -45,6 +45,32 @@ Tabela de usuário
 - created_at
 - updated_at
 
+TODO
+Tasks
+
+Undone
+Done 
+
+- validation - x 
+- pagination
+- register movie
+- update movie
+  - set value releaseDate
+
+- sandwich bar  - x
+  - animação
+- animação modal - x
+
+- build
+- deploy
+
+- login 
+- auto-login
+- auto-logout
+
+header selecionado destacado
+tratar os errors salva filme
+
 
 
 

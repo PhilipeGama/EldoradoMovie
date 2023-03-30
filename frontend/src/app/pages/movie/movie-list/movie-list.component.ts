@@ -1,11 +1,9 @@
+import {
+  animate, style, transition, trigger
+} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
-import {
-  trigger,
-  style,
-  animate,
-  transition } from '@angular/animations';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -39,6 +37,12 @@ export class MovieListComponent implements OnInit {
   ) { }
 
   public movies;
+  currentPage: number = 0;
+
+  onCurrentPage(page: number){
+    this.currentPage = page;
+    this.fetcMovies();
+  }
 
   showEdit = false;
   showView = false;
@@ -53,8 +57,8 @@ export class MovieListComponent implements OnInit {
   }
 
   fetcMovies(){
-    this.movieService.getAll().subscribe(movies => {
-      this.movies = movies;
+    this.movieService.getAll(this.currentPage).subscribe((payload: any) => {
+      this.movies = payload.data.movies;
     });
   }
 
@@ -67,7 +71,7 @@ export class MovieListComponent implements OnInit {
   }
 
   toggleCloseDelete(showDelete: boolean) {
-    this.movieService.getAll().subscribe(movies => {
+    this.movieService.getAll(1).subscribe(movies => {
       this.movies = movies;
       this.showDelete = showDelete;
     });

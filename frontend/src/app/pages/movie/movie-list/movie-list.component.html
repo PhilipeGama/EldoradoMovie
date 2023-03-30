@@ -31,7 +31,7 @@
                 </tr>
             </tbody>
         </table>
-        <app-pagination class="pagination"></app-pagination>
+        <app-pagination class="pagination" (currentPage)="onCurrentPage($event)"></app-pagination>
 </div>
 
 <ng-container *ngIf="showEdit">

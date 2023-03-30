@@ -17,7 +17,7 @@ router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.postUser);
 router.put('/users', UserController.putUser);
 router.get('/genders', GenderController.getAllGender);
-router.get('/movies', MovieController.getAllMovies);
+router.get('/movies', MovieController.getMoviesPaginated);
 
 router.use(Auth);
 

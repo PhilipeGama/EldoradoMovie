@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -7,42 +7,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  pageNumber = [1,2,3];
-
-  meta = {
-    totPage: 10,
-    currentPage: 1,
-    nextPage: 10,
-    itemsPerPage: 10,
-    totItems: 50,
-    lastPage: 5,
-  }
-
+  pages = [1, 2, 3];
+  @Input() totPages: number;
+  @Output() currentPage = new EventEmitter<number>()
   constructor() { }
 
   ngOnInit(): void {
+    //this.loadPaginationIndex()
+  }
+
+  loadPaginationIndex(){
+    console.log(this.totPages);
+    for(let i =1; i < this.totPages; i++){
+      
+      if(i >= 3){
+        return;
+      }
+      this.pages.push(i)
+    }
+ 
   }
 
   nextPage(){
-    console.log(this.pageNumber[2])
-    if(this.meta.totPage > this.pageNumber[2]) {
-      const newArray =  this.pageNumber.map((v) => v + 1);
-      this.pageNumber = newArray;
+    console.log(this.pages)
+    if(this.pages[2] >= this.totPages) {
+      return;
+    }
+    
+    this.currentPage.emit(this.pages[2] - 1)
+
+
+    if(this.totPages > this.pages[2]) {
+      const newArray =  this.pages.map((v) => v + 1);
+      this.pages = newArray;
     }
 
   }
 
   previousPage(){
-    if(this.pageNumber[0] > 1){
-      const newArray =  this.pageNumber.map((v) => v - 1);
-      this.pageNumber = newArray;
+    if(this.pages[0] <= 1){
+      return;
     }
+    this.currentPage.emit(this.pages[0] - 1)
 
+    if(this.pages[0] > 1){
+      const newArray =  this.pages.map((v) => v - 1);
+      this.pages = newArray;
+    }
   }
 
-  currentPage(page: number){
-    this.meta.currentPage = page;
-    console.log(page)
+  onCurrentPage(page: number){
+    this.currentPage.emit(page - 1)
   }
 
 

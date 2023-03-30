@@ -17,10 +17,13 @@ class MovieController {
 		return response.json(movie);
 	}
 
-	async getAllMovies(request: Request, response: Response) {
+	async getMoviesPaginated(request: Request, response: Response) {
+		const { page , limit } = request.query;
 		const movieRepository = getCustomRepository(MovieRepository);
-		const movie = await movieRepository.findAll();
-		return response.status(200).json(movie);
+		const movies = await movieRepository.findMoviesPaginated(Number(page), Number(limit));
+		const countMovies = await movieRepository.countMovies();
+
+		return response.status(200).json({data: {movies, totItems: countMovies}});
 	}
 
 	async postMovie(request: Request, response: Response) {

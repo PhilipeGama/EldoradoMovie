@@ -28,9 +28,16 @@ import { MovieService } from 'src/app/services/movie.service';
   ]
 })
 export class CardsComponent implements OnInit {
-  public movies;
+  movies;
   selectMovie;
-  showView
+  showView;
+  totItems;
+  currentPage: number = 0;
+
+  onCurrentPage(page: number){
+    this.currentPage = page;
+    this.fecthMovies()
+  }
 
   constructor(
     private movieService: MovieService) {}
@@ -41,9 +48,11 @@ export class CardsComponent implements OnInit {
   }
 
   fecthMovies(){
-    this.movieService.getAll().subscribe(movies => {
-      this.movies = movies;
+    this.movieService.getAll(this.currentPage).subscribe((payload: any) => {
+      this.totItems = Math.ceil(payload.data.totItems/2);
+      this.movies = payload.data.movies;
     });
+    
   }
 
   toggleCloseView(show: boolean){
