@@ -1,58 +1,71 @@
 <div class="container">
-    <h2>Listagem de filmes</h2>
-        <div style="margin-bottom: 10px">
-            <a [routerLink]="['/register-movie']" class='btn btn-primary'><i class="fas fa-plus-circle"></i> Novo Filme</a>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Lançamento</th>
-                    <th>Gênero</th>
-                    <th class="col-acoes">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let movie of movies; let i = index">
-                    <td>{{ movie.name | titlecase }}</td>
-                    <td>{{ movie.releaseDate | date:'dd-MM-yyyy' }}</td>
-                    <td>{{ movie.gender.name }}</td>
-                    <td>
-                        <a (click)="toggleEdit(i)" class="btn btn-editar">
-                            <i class="fas fa-pencil"></i>
-                        </a>
-                        <a  (click)="toggleView(i)" class="btn btn-visualizar">
-                            <i class="fas fa-eye"></i>
-                        </a> 
-                        <a (click)="toggleDelete(i)" class="btn btn-excluir">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <app-pagination class="pagination" (currentPage)="onCurrentPage($event)"></app-pagination>
+  <h2>Listagem de filmes</h2>
+  <div style="margin-bottom: 10px">
+    <a [routerLink]="['/register-movie']" class="btn btn-primary"
+      ><i class="fas fa-plus-circle"></i> Novo Filme</a
+    >
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Lançamento</th>
+        <th>Gênero</th>
+        <th class="col-acoes">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies; let i = index">
+        <td>{{ movie.name | titlecase }}</td>
+        <td>{{ movie.releaseDate | date : 'dd-MM-yyyy' }}</td>
+        <td>{{ movie.gender.name }}</td>
+        <td>
+          <a (click)="toggleEdit(i)" class="btn btn-editar">
+            <i class="fas fa-pencil"></i>
+          </a>
+          <a (click)="toggleView(i)" class="btn btn-visualizar">
+            <i class="fas fa-eye"></i>
+          </a>
+          <a (click)="toggleDelete(i)" class="btn btn-excluir">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    class="pagination"
+    (currentPageOutput)="onCurrentPage($event)"
+    [totPages]="totPages"
+  ></app-pagination>
 </div>
 
 <ng-container *ngIf="showEdit">
-    <div class="modal-edit" @modal>
-        <app-movie-edit [movie]="selectMovie" (closeModal)="toggleCloseEdit($event)"></app-movie-edit>
-    </div>
-    <div (click)="toggleEdit(-1)" class="overlay-1" @overlay></div>
+  <div class="modal-edit" @modal>
+    <app-movie-edit
+      [movie]="selectMovie"
+      (closeModal)="toggleCloseEdit($event)"
+    ></app-movie-edit>
+  </div>
+  <div (click)="toggleEdit(-1)" class="overlay-1" @overlay></div>
 </ng-container>
 
 <ng-container *ngIf="showView">
-    <div class="modal-view" @modal>
-        <app-movie-view [movie]="selectMovie" (closeModal)="toggleCloseView($event)"></app-movie-view>
-    </div>
-    <div (click)="toggleView(-1)" class="overlay-1" @overlay></div>
+  <div class="modal-view" @modal>
+    <app-movie-view
+      [movie]="selectMovie"
+      (closeModal)="toggleCloseView($event)"
+    ></app-movie-view>
+  </div>
+  <div (click)="toggleView(-1)" class="overlay-1" @overlay></div>
 </ng-container>
 
 <ng-container *ngIf="showDelete">
-    <div class="modal-delete" @modal>
-        <app-movie-delete [movie]="selectMovie" (closeModal)="toggleCloseDelete($event)"></app-movie-delete>
-    </div>
-    <div @overlay (click)="toggleDelete(-1)" class="overlay-1" @overlay></div>
+  <div class="modal-delete" @modal>
+    <app-movie-delete
+      [movie]="selectMovie"
+      (closeModal)="toggleCloseDelete($event)"
+    ></app-movie-delete>
+  </div>
+  <div @overlay (click)="toggleDelete(-1)" class="overlay-1" @overlay></div>
 </ng-container>
-
-

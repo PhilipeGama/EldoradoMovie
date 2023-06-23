@@ -47,6 +47,8 @@ Tabela de usuário
 
 TODO
 Tasks
+- senha forte
+
 
 Undone
 Done 

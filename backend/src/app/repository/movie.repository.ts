@@ -15,18 +15,14 @@ export default class MovieRepository extends Repository<Movie> {
 		const skip = page * limit || 0;
 		const take = limit || 10;
 
-		const items =  await this.find({
+		const result =  await this.findAndCount({
 			relations: ['gender'],
 			skip,
 			take
 		});
 		
-		return items;
+		return result;
 	}
 
-	async countMovies() {
-		return this.count({
-			relations: ['gender'],
-		})
-	}
+
 }

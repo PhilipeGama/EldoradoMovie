@@ -31,7 +31,8 @@ export class CardsComponent implements OnInit {
   movies;
   selectMovie;
   showView;
-  totItems;
+  totItems: number;
+  totPages: number;
   currentPage: number = 0;
 
   onCurrentPage(page: number){
@@ -39,8 +40,7 @@ export class CardsComponent implements OnInit {
     this.fecthMovies()
   }
 
-  constructor(
-    private movieService: MovieService) {}
+  constructor(private movieService: MovieService) {}
 
 
   ngOnInit(): void {
@@ -49,8 +49,9 @@ export class CardsComponent implements OnInit {
 
   fecthMovies(){
     this.movieService.getAll(this.currentPage).subscribe((payload: any) => {
-      this.totItems = Math.ceil(payload.data.totItems/2);
-      this.movies = payload.data.movies;
+      this.movies = payload.data.items;
+      this.totPages = payload.data.totPages;
+      this.totItems = payload.data.totItems;
     });
     
   }

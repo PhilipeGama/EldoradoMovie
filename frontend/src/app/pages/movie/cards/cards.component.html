@@ -1,25 +1,42 @@
 <div class="container">
   <h2>Filmes</h2>
   <div class="cards">
-    <div *ngFor="let movie of movies; let i = index;" >
-        <div class="card">
-            <img class="card-img-top" [src]="movie.fullPath" alt="Image not found">
-            <div class="card-body">
-              <h5 class="card-title">{{ movie.name }}</h5>
-              <p class="card-text">{{ movie.synopsis | slice:0:100 }} ...</p>
-              <a class="btn btn-primary mr-3" style="color:white" (click)="toggleView(i)">Ler mais</a>
-              <a class="btn btn-primary" [href]="movie.trailer" target="_blank">Ver trailer</a>
-            </div>
-          </div>
+    <div *ngFor="let movie of movies; let i = index">
+      <div class="card">
+        <img
+          class="card-img-top"
+          [src]="movie.fullPath"
+          alt="Image not found"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.name }}</h5>
+          <p class="card-text">{{ movie.synopsis | slice : 0 : 100 }} ...</p>
+          <a
+            class="btn btn-primary mr-3"
+            style="color: white"
+            (click)="toggleView(i)"
+            >Ler mais</a
+          >
+          <a class="btn btn-primary" [href]="movie.trailer" target="_blank"
+            >Ver trailer</a
+          >
+        </div>
+      </div>
     </div>
   </div>
-  <app-pagination class="pagination" (currentPage)="onCurrentPage($event)" [totPages]="totItems"></app-pagination>  
+  <app-pagination
+    class="pagination"
+    (currentPageOutput)="onCurrentPage($event)"
+    [totPages]="totPages"
+  ></app-pagination>
 </div>
 
 <ng-container *ngIf="showView">
   <div class="modal-view" @modal>
-      <app-movie-view [movie]="selectMovie" (closeModal)="toggleCloseView($event)"></app-movie-view>
+    <app-movie-view
+      [movie]="selectMovie"
+      (closeModal)="toggleCloseView($event)"
+    ></app-movie-view>
   </div>
   <div (click)="toggleView(-1)" class="overlay-1" @overlay></div>
 </ng-container>
-

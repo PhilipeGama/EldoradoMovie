@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Movie from 'src/app/model/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -29,9 +29,7 @@ export class MovieEditComponent implements OnInit {
   fullPath;
 
   ngOnInit(): void {
-    console.log()
     this.fetchGender();
-   
     this.filePath = this.movie.fullPath;
   }
 

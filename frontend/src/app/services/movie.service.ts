@@ -13,6 +13,7 @@ export class MovieService {
 
   getAll(page: number, limit?: number): Observable<Movie> {
     let params = new HttpParams();
+    
     limit = 2;
     params = params.append('page', page.toString())
     params = params.append('limit', limit.toString())

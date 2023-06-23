@@ -19,11 +19,15 @@ class MovieController {
 
 	async getMoviesPaginated(request: Request, response: Response) {
 		const { page , limit } = request.query;
+		console.log(request.query)
 		const movieRepository = getCustomRepository(MovieRepository);
-		const movies = await movieRepository.findMoviesPaginated(Number(page), Number(limit));
-		const countMovies = await movieRepository.countMovies();
+		const result = await movieRepository.findMoviesPaginated(Number(page), Number(limit));
 
-		return response.status(200).json({data: {movies, totItems: countMovies}});
+		const [items, totItems] = result;
+
+		const totPages = Math.ceil(totItems / Number(limit)); 
+
+		return response.status(200).json({data: {items, totItems, totPages}});
 	}
 
 	async postMovie(request: Request, response: Response) {
@@ -68,7 +72,7 @@ class MovieController {
 		}
 	}
 
-	public async putMovie(request: Request, response: Response) {
+	async putMovie(request: Request, response: Response) {
 		try {
 			const movieRepository = getCustomRepository(MovieRepository);
 			const { id } = request.params;
@@ -104,7 +108,7 @@ class MovieController {
 		
 	}
 
-	public async deleteMovie(request: Request, response: Response) {
+	async deleteMovie(request: Request, response: Response) {
 		try {
 			const movieRepository = getCustomRepository(MovieRepository);
 			const { id } = request.params;

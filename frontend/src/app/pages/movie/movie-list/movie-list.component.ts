@@ -48,6 +48,8 @@ export class MovieListComponent implements OnInit {
   showView = false;
   showDelete = false;
 
+  totItems: number;
+  totPages: number;
 
   selectMovie;
 
@@ -58,7 +60,9 @@ export class MovieListComponent implements OnInit {
 
   fetcMovies(){
     this.movieService.getAll(this.currentPage).subscribe((payload: any) => {
-      this.movies = payload.data.movies;
+      this.movies = payload.data.items;
+      this.totItems = payload.data.totItems;
+      this.totPages = payload.data.totPages;
     });
   }
 
