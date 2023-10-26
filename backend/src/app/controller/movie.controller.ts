@@ -19,7 +19,6 @@ class MovieController {
 
 	async getMoviesPaginated(request: Request, response: Response) {
 		const { page , limit } = request.query;
-		console.log(request.query)
 		const movieRepository = getCustomRepository(MovieRepository);
 		const result = await movieRepository.findMoviesPaginated(Number(page), Number(limit));
 
