@@ -2,7 +2,6 @@ import {
   animate, style, transition, trigger
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 @Component({
   selector: 'app-movie-list',
@@ -32,60 +31,55 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieListComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
     private movieService: MovieService
   ) { }
 
-  public movies;
+  movies;
+  index;
   currentPage: number = 0;
+  totItems: number;
+  totPages: number;
+  showEdit = false;
+  showView = false;
+  showDelete = false;
+  selectedMovie;
 
   onCurrentPage(page: number){
     this.currentPage = page;
     this.fetcMovies();
   }
 
-  showEdit = false;
-  showView = false;
-  showDelete = false;
-
-  totItems: number;
-  totPages: number;
-
-  selectMovie;
-
   ngOnInit(): void {
-    const id =  this.route.snapshot.params.id;
     this.fetcMovies();
   }
 
   fetcMovies(){
-    this.movieService.getAll(this.currentPage).subscribe((payload: any) => {
+    this.movieService.getAll(this.currentPage, 10).subscribe((payload: any) => {
       this.movies = payload.data.items;
+      console.log(this.movies)
       this.totItems = payload.data.totItems;
       this.totPages = payload.data.totPages;
     });
   }
 
-  toggleDelete(i: number) {
+  toggleEdit(i: number) {
     if(i == -1) {
-      this.selectMovie = null;
+      this.selectedMovie = null;
     }
-    this.selectMovie = this.movies[i];
-    this.showDelete = !this.showDelete;
+    this.selectedMovie = this.movies[i];
+    this.showEdit = !this.showEdit;
   }
 
-  toggleCloseDelete(showDelete: boolean) {
-    this.movieService.getAll(1).subscribe(movies => {
-      this.movies = movies;
-      this.showDelete = showDelete;
-    });
+  toggleCloseEdit(showEdit: boolean) { 
+        this.showEdit = showEdit;
   }
+
 
   toggleView(i: number) {
     if(i == -1) {
-      this.selectMovie = null;
+      this.selectedMovie = null;
     }
-    this.selectMovie = this.movies[i];
+    this.selectedMovie = this.movies[i];
     this.showView = !this.showView;
   }
 
@@ -94,16 +88,26 @@ export class MovieListComponent implements OnInit {
   }
 
 
-  toggleEdit(i: number) {
-    if(i == -1) {
-      this.selectMovie = null;
+  toggleDelete(index: number) {
+    if(index == -1) {
+      this.selectedMovie = null;
+      return;
     }
-    this.selectMovie = this.movies[i];
-    this.showEdit = !this.showEdit;
+    this.index = index;
+    this.selectedMovie = this.movies[index];
+    this.showDelete = !this.showDelete;
   }
 
-  toggleCloseEdit(showEdit: boolean) { 
-      this.showEdit = showEdit;
+  toggleCloseDelete(btnType: string) {
+    if(btnType === "cancel") {
+      this.showDelete = false
+    }
+
+    if(btnType == "confirm") {
+      //this.movieService.delete(this.selectedMovie.id).subscribe(() => this.showDelete = false);
+      this.movies = this.movies.slice(this.index, 1)
+      this.showDelete = false;
+    }
   }
 
 }

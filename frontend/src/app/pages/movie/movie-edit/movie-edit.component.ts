@@ -45,7 +45,7 @@ export class MovieEditComponent implements OnInit {
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
     formData.append('trailer', this.movie.trailer);
-    formData.append('releaseDate', this.movie.releaseDate);
+    formData.append('releaseDate', this.movie.releaseDate.toString());
     formData.append('boxOffice', this.movie.boxOffice.toString());
     formData.append('gender', this.movie.gender.id.toString())
 

@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import Movie from 'src/app/model/movie.interface';
-import { MovieService } from 'src/app/services/movie.service';
 
 
 @Component({
@@ -9,23 +7,18 @@ import { MovieService } from 'src/app/services/movie.service';
   templateUrl: './movie-delete.component.html',
   styleUrls: ['./movie-delete.component.scss']
 })
-export class MovieDeleteComponent implements OnInit {
+export class MovieDeleteComponent {
 
-  constructor(private  movieService: MovieService){}
+  constructor(){}
 
   @Input() movie: Movie;
+  @Output() btnClicked = new EventEmitter<string>();
 
-  @Output() closeModal = new EventEmitter<boolean>();
-
-  toggleDelete(){
-    this.closeModal.emit(false);
+  onConfirm(){
+    this.btnClicked.emit('confirm')
   }
 
-  ngOnInit(): void {}
-
-  onDelete(){
-    this.movieService.delete(this.movie.id).subscribe(() => this.closeModal.emit(false));
+  onCancel(){
+    this.btnClicked.emit('cancel');
   }
-
-
 }

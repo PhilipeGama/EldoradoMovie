@@ -43,7 +43,7 @@
 <ng-container *ngIf="showEdit">
   <div class="modal-edit" @modal>
     <app-movie-edit
-      [movie]="selectMovie"
+      [movie]="selectedMovie"
       (closeModal)="toggleCloseEdit($event)"
     ></app-movie-edit>
   </div>
@@ -53,7 +53,7 @@
 <ng-container *ngIf="showView">
   <div class="modal-view" @modal>
     <app-movie-view
-      [movie]="selectMovie"
+      [movie]="selectedMovie"
       (closeModal)="toggleCloseView($event)"
     ></app-movie-view>
   </div>
@@ -63,8 +63,8 @@
 <ng-container *ngIf="showDelete">
   <div class="modal-delete" @modal>
     <app-movie-delete
-      [movie]="selectMovie"
-      (closeModal)="toggleCloseDelete($event)"
+      [movie]="selectedMovie"
+      (btnClicked)="toggleCloseDelete($event)"
     ></app-movie-delete>
   </div>
   <div @overlay (click)="toggleDelete(-1)" class="overlay-1" @overlay></div>

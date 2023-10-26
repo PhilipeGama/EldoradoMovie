@@ -1,17 +1,16 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-}
+    grid-template-columns: auto auto auto;
+  }
 
 .card {
-    width: 18rem; 
+    width: 300px; 
     min-height: 404px;
     p {
         min-height: 72px;

@@ -11,10 +11,8 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(page: number, limit?: number): Observable<Movie> {
+  getAll(page: number, limit: number = 3): Observable<Movie> {
     let params = new HttpParams();
-    
-    limit = 2;
     params = params.append('page', page.toString())
     params = params.append('limit', limit.toString())
     return this.http.get<Movie>(`${environment.baseApiUrl}/movies`, { params });
