@@ -21,7 +21,7 @@ class GenderController {
 			.save(gender)
 			.then(() => {
 				return response.status(201).json({
-					title: 'Gênero cadastrado com sucesso!',
+					title: 'Gender registered successfully.',
 				});
 			})
 			.catch((error) => {
@@ -41,7 +41,7 @@ class GenderController {
 			.update(id, gender)
 			.then(() => {
 				return response.status(200).json({
-					title: 'Gênero atualizado com sucesso!',
+					title: 'Gender updated successfully.',
 				});
 			})
 			.catch((error) => {

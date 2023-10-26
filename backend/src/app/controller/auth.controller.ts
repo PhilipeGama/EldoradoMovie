@@ -10,7 +10,7 @@ class AuthController {
 
 		if (request.body.email == '' || request.body.password == '') {
 			return response.status(401).json({
-				title: 'Campo Login e Senha obrigatório!',
+				title: 'Email and password is required!',
 			});
 		}
 
@@ -18,7 +18,7 @@ class AuthController {
 
 		if (typeof user === 'undefined') {
 			return response.status(401).json({
-				title: 'Login/Senha inválida!',
+				title: 'Login failed',
 			});
 		}
 
@@ -29,7 +29,7 @@ class AuthController {
 
 		if (!passwordIsValid) {
 			return response.status(401).json({
-				title: 'Login/Senha inválida!',
+				title: 'Login failed',
 			});
 		}
 

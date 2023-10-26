@@ -39,7 +39,7 @@ class MovieController {
 
 			if (typeof movieAlreadyExists !== 'undefined') {
 				return response.status(500).json({
-					title: 'Um filme com o mesmo nome já existe no banco de dados!',
+					title: 'This movie is already registed',
 				});
 			}
 
@@ -57,7 +57,7 @@ class MovieController {
 				.save(movie)
 				.then(() => {
 					return response.status(201).json({
-						title: 'Filme cadastrado com sucesso!',
+						title: 'Movie registered successfully!',
 					});
 				})
 				.catch((error) => {
@@ -98,7 +98,7 @@ class MovieController {
 			movieRepository.update(id, movie);
 
 			response.status(200).json({
-				title: 'Filme atualizado com successo',
+				title: 'Movie updated successfully!',
 			});
 		} catch (error) {
 			return response.status(404).json({
@@ -123,7 +123,7 @@ class MovieController {
 			});
 	
 			response.status(200).json({
-				title: 'Filme deletado com sucesso',
+				title: 'Movie deleted successfully!',
 			});
 		} catch (error) {
 			return response.status(404).json({
