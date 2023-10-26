@@ -118,21 +118,6 @@
         Campo obrigatório!
       </div>
     </div>
-    <div>
-      <div class="form-group">
-        <label for="poster">Selecione uma imagem:</label>
-        <input
-          class="form-control-file"
-          type="file"
-          id="poster"
-          name="poster"
-          (change)="handleFile($event)"
-        />
-      </div>
-      <div class="img-container">
-        <img [src]="filePath" />
-      </div>
-    </div>
     <div class="form-group">
       <label for="gender">Genero</label>
       <select
@@ -158,6 +143,21 @@
       </div>
     </div>
 
+    <div class="">
+      <div class="form-group">
+        <label for="poster">Selecione uma imagem:</label>
+        <input
+          class="form-control-file"
+          type="file"
+          id="poster"
+          name="poster"
+          (change)="handleFile($event)"
+        />
+      </div>
+      <div class="img-fluid">
+        <img [src]="filePath" />
+      </div>
+    </div>
     <div class="btn-group">
       <button
         type="button"

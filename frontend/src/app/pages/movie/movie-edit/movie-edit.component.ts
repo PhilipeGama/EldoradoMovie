@@ -32,7 +32,7 @@ export class MovieEditComponent implements OnInit {
   ngOnInit(): void {
     this.fetchGender();
     this.filePath = this.movie.fullPath;
-    console.log(this.movie)
+    this.movie.releaseDate = this.movie.releaseDate.split('T')[0]
   }
 
   fetchGender() {
