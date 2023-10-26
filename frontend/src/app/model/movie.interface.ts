@@ -5,7 +5,7 @@ export default interface Movie {
   name: string;
   synopsis: string;
   trailer: string;
-  releaseDate: string;
+  releaseDate: Date;
   boxOffice: number;
   poster?: string;
   createdAt?: Date;

@@ -1,25 +1,20 @@
 <div class="container">
-  <h2 class="display-5">{{movie.name}}</h2>
-  <p class="lead">{{movie.synopsis}}</p>
-  <hr class="my-4">
-  <p>Genero: {{movie.gender.name}}</p>
-  <p>Data de Lançamento: {{movie.releaseDate | date:'dd-MM-yyyy'}}</p>
-  <p>Orçamento: {{movie.boxOffice| currency: 'BRL'}}</p>
+  <h2 class="display-5">{{ movie.name }}</h2>
+  <p class="lead">{{ movie.synopsis }}</p>
+  <hr class="my-4" />
+  <p>Genero: {{ movie.gender.name }}</p>
+  <p>Data de Lançamento: {{ movie.releaseDate | date : 'dd-MM-yyyy' }}</p>
+  <p>Orçamento: {{ movie.boxOffice | currency }}</p>
   <div class="box-container">
-    <div>
-      <p>Trailer</p>
-      <div class="box" [innerHTML]="html_trailer"></div>
-    </div>
     <div>
       <p>Imagem</p>
       <div class="img-container">
-        <img [src]="movie.fullPath" alt="">
+        <img [src]="movie.fullPath" alt="" />
       </div>
     </div>
   </div>
-  <br><br>
+  <br /><br />
   <div class="btn-group">
     <button class="btn btn-danger" (click)="toggleClose()">Fechar</button>
   </div>
-
 </div>

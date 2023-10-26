@@ -27,10 +27,12 @@ export class MovieEditComponent implements OnInit {
   file;
   filePath;
   fullPath;
+  releaseDate = '2022-10-10';
 
   ngOnInit(): void {
     this.fetchGender();
     this.filePath = this.movie.fullPath;
+    console.log(this.movie)
   }
 
   fetchGender() {
@@ -87,6 +89,6 @@ export class MovieEditComponent implements OnInit {
         return new Date(dateString);
     }
     return null;
-}
+  }
 
 }

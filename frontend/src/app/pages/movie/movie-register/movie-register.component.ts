@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import Movie from 'src/app/model/movie.interface';
 import { GenderService } from 'src/app/services/gender.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -15,7 +16,7 @@ export class MovieRegisterComponent implements OnInit {
     name: '',
     synopsis: '',
     trailer: '',
-    releaseDate: '',
+    releaseDate: null,
     boxOffice: null,
     poster: '',
     gender: null
@@ -31,7 +32,7 @@ export class MovieRegisterComponent implements OnInit {
   public successMessage;
   public errorMessage;
 
-  constructor(private genderService: GenderService, private movieService: MovieService) {}
+  constructor(private genderService: GenderService, private movieService: MovieService, private router: Router) {}
 
   ngOnInit(): void {
     this.getGender();
@@ -48,7 +49,7 @@ export class MovieRegisterComponent implements OnInit {
     formData.append('name', this.movie.name);
     formData.append('synopsis', this.movie.synopsis);
     formData.append('trailer', this.movie.trailer);
-    formData.append('releaseDate', this.movie.releaseDate);
+    formData.append('releaseDate', this.movie.releaseDate.toString());
     formData.append('boxOffice', this.movie.boxOffice.toString());
     formData.append('gender', this.movie.gender.toString())
 
@@ -93,7 +94,7 @@ export class MovieRegisterComponent implements OnInit {
       name: '',
       synopsis: '',
       trailer: '',
-      releaseDate: '',
+      releaseDate: null,
       boxOffice: null,
       poster: '',
       gender: null,
@@ -107,6 +108,8 @@ export class MovieRegisterComponent implements OnInit {
 
     this.filePath = null;
     form.form.reset();
+    this.router.navigate(["/movies"])
+
   }
 
   clearForm(){
@@ -114,7 +117,7 @@ export class MovieRegisterComponent implements OnInit {
       name: '',
       synopsis: '',
       trailer: '',
-      releaseDate: '',
+      releaseDate: null,
       boxOffice: null,
       poster: '',
       gender: null,
