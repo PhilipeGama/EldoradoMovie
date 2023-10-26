@@ -96,16 +96,21 @@
 
     <div class="form-group">
       <label for="boxOffice">Bilheteria</label>
-      <input
-        type="text"
-        class="form-control"
-        id="boxOffice"
-        name="boxOffice"
-        placeholder="Digite a bilheteria do filme"
-        required
-        [(ngModel)]="movie.boxOffice"
-        #boxOffice="ngModel"
-      />
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="boxOffice"
+          name="boxOffice"
+          placeholder="Digite a bilheteria do filme"
+          required
+          [(ngModel)]="movie.boxOffice"
+          #boxOffice="ngModel"
+        />
+      </div>
       <div
         class="invalid-feedback"
         *ngIf="boxOffice.errors?.required && boxOffice.touched"

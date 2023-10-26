@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +33,12 @@ export class MovieRegisterComponent implements OnInit {
   public successMessage;
   public errorMessage;
 
-  constructor(private genderService: GenderService, private movieService: MovieService, private router: Router) {}
+  constructor(
+    private genderService: GenderService, 
+    private movieService: MovieService, 
+    private router: Router,
+    private currencyPipe : CurrencyPipe
+  ) {}
 
   ngOnInit(): void {
     this.getGender();
@@ -125,6 +131,10 @@ export class MovieRegisterComponent implements OnInit {
     this.filePath = null;
   }
 
-  
+  transformAmount(element){
+    this.movie.boxOffice = this.currencyPipe.transform(this.movie.boxOffice, '$');
+
+    element.target.value = this.movie.boxOffice;
+}
 }
 

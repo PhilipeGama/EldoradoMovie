@@ -1,11 +1,13 @@
 
+import { CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { CardComponent } from './components/card/card.component';
@@ -15,14 +17,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { CardsComponent } from './pages/movie/cards/cards.component';
 import { MovieDeleteComponent } from './pages/movie/movie-delete/movie-delete.component';
 import { MovieEditComponent } from './pages/movie/movie-edit/movie-edit.component';
 import { MovieListComponent } from './pages/movie/movie-list/movie-list.component';
 import { MovieRegisterComponent } from './pages/movie/movie-register/movie-register.component';
 import { MovieViewComponent } from './pages/movie/movie-view/movie-view.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationInterceptor } from './services/authorization.interceptor';
 
 @NgModule({
@@ -53,7 +55,8 @@ import { AuthorizationInterceptor } from './services/authorization.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,
       multi: true,
-    }
+    },
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })
