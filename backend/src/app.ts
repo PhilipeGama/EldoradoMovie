@@ -1,15 +1,15 @@
 import cors from 'cors';
+import * as dotenv from 'dotenv';
 import express from 'express';
 import { resolve } from 'path';
 import { createConnection } from 'typeorm';
-
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-import { GENDERS, MOVIES } from './app/database/config/seed';
+import options from './app/database/config/ormconfig';
 import Gender from './app/entity/gender.entity';
 import Movie from './app/entity/movie.entity';
 import router from './app/routers/router';
+import { GENDERS, MOVIES } from './app/utils/seed';
+dotenv.config();
+
 
 const app = express();
 
@@ -22,14 +22,15 @@ app.use(
 	express.static(resolve(__dirname, '..', 'public', 'static', 'uploads'))
 );
 
-
-createConnection().then(async (db) => {
+createConnection(options).then(async (db) => {
+	console.log(db);
 	const genderExists = (
 		await db.manager.query(
 				`SELECT *from gender`,
 			)
 	)
 
+	console.log(genderExists);
 	const movieExists = (
 		await db.manager.query(
 				`SELECT *from movie`,
@@ -52,6 +53,9 @@ createConnection().then(async (db) => {
 		.execute()
 	}
 
+})
+.catch(error => {
+	console.log(error)
 });
 
 app.use(router);

@@ -1,10 +1,11 @@
 import * as dotenv from 'dotenv';
+import { ConnectionOptions } from 'typeorm';
 dotenv.config();
 
-export = {
+const config: ConnectionOptions = {
 	type: 'mysql',
 	host: process.env.DB_HOST,
-	port: process.env.DB_PORT,
+	port: +process.env.DB_PORT,
 	synchronize: true,
 	logging: false,
 	username: process.env.DB_USERNAME,
@@ -18,3 +19,5 @@ export = {
 	},
 	ssl: false,
 };
+
+export default config;
