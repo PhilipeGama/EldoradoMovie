@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import Multer from 'multer';
 
-import AuthController from 'src/app/controller/auth.controller';
-import GenderController from 'src/app/controller/gender.controller';
-import MovieController from 'src/app/controller/movie.controller';
-import UserController from 'src/app/controller/user.controller';
+import AuthController from '../controller/auth.controller';
+import GenderController from '../controller/gender.controller';
+import MovieController from '../controller/movie.controller';
+import UserController from '../controller/user.controller';
 import Auth from '../middlewares/auth-middleware';
 import uploadConfig from '../utils/multer';
 
@@ -12,6 +12,10 @@ const upload = Multer(uploadConfig);
 const router = Router();
 
 router.post('/auth', AuthController.auth);
+
+router.get('/health-check', (req, res) => {
+	res.send('api health');
+})
 
 router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.postUser);

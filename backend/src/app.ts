@@ -23,14 +23,12 @@ app.use(
 );
 
 createConnection(options).then(async (db) => {
-	console.log(db);
 	const genderExists = (
 		await db.manager.query(
 				`SELECT *from gender`,
 			)
 	)
 
-	console.log(genderExists);
 	const movieExists = (
 		await db.manager.query(
 				`SELECT *from movie`,
@@ -58,8 +56,11 @@ createConnection(options).then(async (db) => {
 	console.log(error)
 });
 
+
 app.use(router);
 
-app.listen(process.env.PORT, () => {
-	console.log(`PORT ${process.env.PORT}`);
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
+
+app.listen(+PORT,'0.0.0.0', () => {
+	console.log(`PORT ${PORT}`);
 });
