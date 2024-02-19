@@ -59,8 +59,8 @@ createConnection(options).then(async (db) => {
 
 app.use(router);
 
-const PORT = process.env.NODE_DOCKER_PORT || 8080;
+const PORT = process.env.PORT || 6868;
 
-app.listen(+PORT,'0.0.0.0', () => {
+app.listen(+PORT, '0.0.0.0', () => {
 	console.log(`PORT ${PORT}`);
 });
